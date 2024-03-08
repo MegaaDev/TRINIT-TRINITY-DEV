@@ -10,11 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@babel/template": "^7.24.0",
     "@mantine/core": "^7.6.1",
     "@mantine/dates": "^7.6.1",
     "@mantine/hooks": "^7.6.1",
     "@mantine/modals": "^7.6.1",
     "@tabler/icons-react": "^2.47.0",
+    "agora-react-uikit": "^1.2.0",
     "autoprefixer": "^10.4.18",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
