@@ -19,7 +19,6 @@ const Day = (props: Dday) => {
         style={{ boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.08)' }}
         onClick={() => {
           props.setActive(props.day);
-          console.log(props.active);
         }}
       >
         {props.day}

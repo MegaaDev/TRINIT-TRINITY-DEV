@@ -6,6 +6,7 @@ import Schedule from './components/Schedule/Schedule';
 import Home from './pages/Home/Home';
 import Landing from './pages/Landing/Landing';
 import '@mantine/core/styles.css';
+import BrowseCourse from './components/BrowseCourses/BrowseCourse';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route index element={<Schedule />} />
           <Route path="myschedule" element={<Schedule />} />
           <Route path="mycourses" element={<Courses />} />
+          <Route path="courses" element={<BrowseCourse />} />
         </Route>
       </Routes>
     </div>
