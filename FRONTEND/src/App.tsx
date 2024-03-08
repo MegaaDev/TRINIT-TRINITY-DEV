@@ -3,6 +3,10 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Courses from './components/Courses/Courses';
 import Schedule from './components/Schedule/Schedule';
+import Home from './pages/Home/Home';
+import Landing from './pages/Landing/Landing';
+import '@mantine/core/styles.css';
+
 
 function App() {
   return (

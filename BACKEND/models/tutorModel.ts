@@ -15,10 +15,11 @@ const tutorSchema = new mongoose.Schema({
     required: [true, "Please enter a short bio"],
     maxLength: [500, "Your bio cannot exceed 500 characters"],
   },
-  availablePlans: [
+  availableCourses: [
     {
         name:String,
         price:Number,
+        language:String,
         description:String,
         duration:Number, // duration of each class
         level:{

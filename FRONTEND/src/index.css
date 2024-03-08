@@ -1,3 +1,39 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.boxShadow{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.hoverDay{
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.hoverDay:hover{
+    background-color: #2a2a2aea;
+    color: #f6f6f6;
+}
+
+.hoverDay:active{
+    background-color: #000000;
+    color: #f6f6f6;
+}
+
+.activeDay{
+    background-color: #000000;
+    color: #f6f6f6;
+}
