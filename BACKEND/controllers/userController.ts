@@ -82,7 +82,7 @@ const register = expressAsyncHandler(async (req, res) => {
 const logout = expressAsyncHandler(async (req, res) => {
   res
     .status(200)
-    .cookie('ospbl', '', {
+    .cookie('trinity', '', {
       httpOnly: true,
       secure: process.env.NODE_ENV != 'DEV',
       expires: new Date(0),

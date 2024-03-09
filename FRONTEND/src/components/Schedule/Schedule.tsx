@@ -12,6 +12,18 @@ const currentDate = new Date();
 const currentDay = days[currentDate.getDay()] || '';
 const Day = (props: Dday) => {
   const [selectedDay, setSelectedDay] = useState('');
+
+  useEffect(()=>{
+    axios.get('http://localhost:3000/api/tutor/schedule')
+      .then((response) => {
+        // Handle the response data here
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        console.error(error);
+      });
+  })
   return (
     <div>
       {' '}

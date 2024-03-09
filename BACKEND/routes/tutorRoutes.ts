@@ -14,6 +14,8 @@ const router = express.Router();
 
 router.get('/', getAllTutors);
 router.get('/:id', getTutorById);
+router.get('/schedule',protect, getSchedule);
+
 router.get('/language/:language', getTutorByLanguage);
 router.post('/', protect, restricTo('TUTOR'), createTutor);
 router.get('/schedule/:id', getSchedule);

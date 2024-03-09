@@ -85,3 +85,11 @@ body {
     background-color: #3591e2;
     color: #f6f6f6;
 }
+
+.noScroll div{
+    overflow: hidden !important;
+}
+
+._3Sxu7{
+    margin-top: -2px;
+}

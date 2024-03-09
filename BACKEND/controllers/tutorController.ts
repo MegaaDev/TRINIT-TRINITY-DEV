@@ -18,6 +18,23 @@ const isTutor = expressAsyncHandler(
   }
 );
 
+const getSchedule = expressAsyncHandler(async (req: any, res) => {
+  const tutor = await Tutor.findOne({ user: req.user._id });
+  console.log(tutor);
+  if (!tutor) {
+    res.status(404).json({
+      status: 'fail',
+      message: 'Tutor not found',
+    });
+    return;
+  }
+  res.status(200).json({
+    status: 'success',
+    schedule: tutor,
+  });
+}
+);
+
 const createTutor = expressAsyncHandler(async (req: any, res) => {
   const { language, bio, availablePlans, resume } = req.body;
   const tutor = await Tutor.create({
@@ -124,6 +141,7 @@ export {
   getTutorByLanguage,
   getTutorById,
   updateTutor,
+  //   updateTutorPlan,
   getSchedule,
   isTutor,
 };

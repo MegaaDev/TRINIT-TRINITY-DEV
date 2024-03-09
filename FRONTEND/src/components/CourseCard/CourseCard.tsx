@@ -24,7 +24,7 @@ const CourseCard: FC<CourseCardProps> = ({ course }) => {
           />
         </Card.Section>
 
-        <div className="flex flex-col mt-4 mb-4">
+         <div className="flex flex-col mt-4 mb-4">
           <div className="mb-2">
             <Text fw={500}>{course.name}</Text>
           </div>

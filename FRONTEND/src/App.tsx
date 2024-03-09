@@ -25,6 +25,7 @@ import CreateTest from './pages/Quiz/CreateQuiz';
 import Resources from './pages/Resources/ResourceHub';
 import QuizViewer from './pages/Quiz/QuizViewer';
 import FlashCardHolder from './pages/FlashCards/FlashCardHolder';
+import BoughtCourses from './components/BoughtCourses/BoughtCourses';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             <Route path="myschedule" element={<Schedule />} />
             <Route path="createcourse" element={<CreateCourse />} />
             <Route path="mycourses" element={<Courses />} />
+            <Route path="boughtCourses" element={<BoughtCourses />} />
             <Route path="mycourses/:id" element={<ManageCourse />} />
             <Route path="mycourses/desc/:id" element={<CourseHome />} />
             <Route path="courses" element={<BrowseCourse />} />

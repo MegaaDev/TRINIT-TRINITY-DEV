@@ -12,17 +12,17 @@ const Video2: FC<Video2Props> = ({ setVideoCall  }) => {
     channel: 'TriNit',
     token: '007eJxTYJj4mIMzX8Noftzdbkmns/n26s2v5tV0mxx6kZQ6pfpL9gcFhuRk86QksyQDQzPTRJPUVAsLU9NEI0OjpMREU4tUU4PksvzXqQ2BjAxbndMYGKEQxGdjCCnK9MssYWAAAJb8ILM=', // use null or skip if using app in testing mode
     role:(role==="TEACHER")?"host":"audience",
-    layout: layout.grid,
+    layout: layout.pin,
   };
   const callbacks = {
     EndCall: () => setVideoCall(false),
   };
   return (
     <div className='absolute top-0 left-0 bottom-0 z-10 right-0 flex justify-center items-center bg-[#000000a9]'>
-        <div style={{display: 'flex', width: '90vw', height: '90vh', background:"#329AEF"}}>
+        <div className='noScroll' style={{display: 'flex', width: '90vw', height: '90vh', background:"transparent", overflow:'hidden'}}>
             <AgoraUIKit
-                rtcProps={rtcProps} callbacks={callbacks}
-
+                rtcProps={rtcProps}
+                callbacks={callbacks}
                 styleProps={{
                         localBtnContainer: {backgroundColor: '#7272F1'}}
                 }
