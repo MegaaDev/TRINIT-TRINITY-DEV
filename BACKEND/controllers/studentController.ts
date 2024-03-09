@@ -22,13 +22,6 @@ const registerCourse = expressAsyncHandler(async (req: any, res) => {
     });
     return;
   }
-  if (!tutor.availablePlans[course]) {
-    res.status(400).json({
-      status: "fail",
-      message: "Course not available",
-    });
-    return;
-  }
   // create an entry if it does not exist, otherwise update existing entry
   if (!enrolledCourse) {
     EnrolledCourses.create({
