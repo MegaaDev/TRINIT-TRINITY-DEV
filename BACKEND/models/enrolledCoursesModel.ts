@@ -7,41 +7,13 @@ const userEnrolledCoursesSchema = new mongoose.Schema({
     {
       courseID: { type: ObjectId, ref: 'Courses' },
       courseBookedSlot: {
-        Monday: [
-          {
-            slot: Number,
-          },
-        ],
-        Tuesday: [
-          {
-            slot: Number,
-          },
-        ],
-        Wednesday: [
-          {
-            slot: Number,
-          },
-        ],
-        Thursday: [
-          {
-            slot: Number,
-          },
-        ],
-        Friday: [
-          {
-            slot: Number,
-          },
-        ],
-        Saturday: [
-          {
-            slot: Number,
-          },
-        ],
-        Sunday: [
-          {
-            slot: Number,
-          },
-        ],
+        Monday: [Number],
+        Tuesday: [Number],
+        Wednesday: [Number],
+        Thursday: [Number],
+        Friday: [Number],
+        Saturday: [Number],
+        Sunday: [Number],
       },
     },
   ],

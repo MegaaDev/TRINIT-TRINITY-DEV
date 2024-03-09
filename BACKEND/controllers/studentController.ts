@@ -37,13 +37,14 @@ const registerCourse = expressAsyncHandler(async (req: any, res) => {
   }
 
   const numberOfSlots =
-    timeSlots.Monday.length +
-    timeSlots.Tuesday.length +
-    timeSlots.Wednesday.length +
-    timeSlots.Thursday.length +
-    timeSlots.Friday.length +
-    timeSlots.Saturday.length +
-    timeSlots.Sunday.length;
+    timeSlots?.Monday?.length ||
+    0 + timeSlots?.Tuesday?.length ||
+    0 + timeSlots?.Wednesday?.length ||
+    0 + timeSlots?.Thursday?.length ||
+    0 + timeSlots?.Friday?.length ||
+    0 + timeSlots?.Saturday?.length ||
+    0 + timeSlots?.Sunday?.length ||
+    0;
 
   const coursePrice =
     selectedCourse.price * numberOfSlots * 4 * selectedCourse.duration;
@@ -92,8 +93,9 @@ const registerCourse = expressAsyncHandler(async (req: any, res) => {
 
   // create an entry if it does not exist, otherwise update existing entry
   if (!enrolledCourse) {
-    EnrolledCourses.create({
-      user: req.user_id,
+    console.log(timeSlots, 'timeSlots');
+    await EnrolledCourses.create({
+      user: req.user._id,
       enrolledCoursesArray: [{ courseID: course, courseBookedSlot: timeSlots }],
     });
   } else {
@@ -101,15 +103,15 @@ const registerCourse = expressAsyncHandler(async (req: any, res) => {
       courseID: course,
       courseBookedSlot: timeSlots,
     });
+    await enrolledCourse?.save();
   }
 
   const expiresIn = new Date();
+  student.credits -= coursePrice;
   expiresIn.setMonth(expiresIn.getMonth() + 1);
   student.tutorsRegistered.push({ tutor, course, expiresIn });
-  student.credits -= coursePrice;
   await selectedCourse.save();
   await student.save();
-  await enrolledCourse?.save();
   res.status(200).json({
     status: 'success',
     student,

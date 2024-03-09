@@ -1,20 +1,20 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const studentSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
     required: true,
   },
   tutorsRegistered: [
     {
       tutor: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Tutor",
+        ref: 'Tutor',
       },
       plan: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Plan",
+        ref: 'Plan',
       },
       expiresIn: Date,
     },
@@ -29,6 +29,6 @@ const studentSchema = new mongoose.Schema({
   },
 });
 
-const Student = mongoose.model("Student", studentSchema);
+const Student = mongoose.model('Student', studentSchema);
 
 export default Student;

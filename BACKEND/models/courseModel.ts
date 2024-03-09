@@ -87,53 +87,39 @@ const courseSchema = new mongoose.Schema({
   },
   bookedSlots: {
     Monday: [
-      [
-        {
-          type: Number,
-        },
-      ],
+      {
+        type: Number,
+      },
     ],
     Tuesday: [
-      [
-        {
-          type: Number,
-        },
-      ],
+      {
+        type: Number,
+      },
     ],
     Wednesday: [
-      [
-        {
-          type: Number,
-        },
-      ],
+      {
+        type: Number,
+      },
     ],
     Thursday: [
-      [
-        {
-          type: Number,
-        },
-      ],
+      {
+        type: Number,
+      },
     ],
     Friday: [
-      [
-        {
-          type: Number,
-        },
-      ],
+      {
+        type: Number,
+      },
     ],
     Saturday: [
-      [
-        {
-          type: Number,
-        },
-      ],
+      {
+        type: Number,
+      },
     ],
     Sunday: [
-      [
-        {
-          type: Number,
-        },
-      ],
+      {
+        type: Number,
+      },
     ],
   },
   certified: {

@@ -94,7 +94,7 @@ const CoursePage: FC<CoursePageProps> = ({}) => {
       .post(
         `http://localhost:3000/api/student/registerCourse`,
         {
-          selectedSlots,
+          timeSlots: selectedSlots,
           course: id,
           tutorId: course?.creatorID?._id,
         },
