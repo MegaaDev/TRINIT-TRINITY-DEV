@@ -1,102 +1,106 @@
-import { ObjectId } from "mongodb";
-import mongoose, { mongo } from "mongoose";
+import { ObjectId } from 'mongodb';
+import mongoose, { mongo } from 'mongoose';
 
 const courseSchema = new mongoose.Schema({
   name: {
     type: String,
-    require: [true, "Please enter course name."],
+    require: [true, 'Please enter course name.'],
   },
   price: {
     type: Number,
-    require: [true, "Please enter course price."],
+    require: [true, 'Please enter course price.'],
   },
   language: {
     type: String,
-    require: [true, "Please enter course language"],
+    require: [true, 'Please enter course language'],
   },
   description: {
     type: String,
-    require: [true, "Please enter course description."],
+    require: [true, 'Please enter course description.'],
   },
   duration: {
     type: Number,
-    require: [true, "Please enter course duration in months."],
+    require: [true, 'Please enter course duration in months.'],
   },
   weekly_classes_limit: {
     type: Number,
-    require: [true, "Please enter a Weekly Classes Limit"],
+    require: [true, 'Please enter a Weekly Classes Limit'],
   },
   start_date: {
     type: Date,
-    require: [true, "Please enter Course Start Date"],
+    require: [true, 'Please enter Course Start Date'],
   },
   end_date: {
     type: Date,
-    require: [true, "Please enter Course End Date"],
+    require: [true, 'Please enter Course End Date'],
   },
   slots: {
     Monday: [
       [
         {
-          slot: String,
+          type: String,
         },
       ],
     ],
     Tuesday: [
       [
         {
-          slot: String,
+          type: String,
         },
       ],
     ],
     Wednesday: [
       [
         {
-          slot: String,
+          type: String,
         },
       ],
     ],
     Thursday: [
       [
         {
-          slot: String,
+          type: String,
         },
       ],
     ],
     Friday: [
       [
         {
-          slot: String,
+          type: String,
         },
       ],
     ],
     Saturday: [
       [
         {
-          slot: String,
+          type: String,
         },
       ],
     ],
     Sunday: [
       [
         {
-          slot: String,
+          type: String,
         },
       ],
     ],
   },
   certified: {
     type: Boolean,
-    require: [true, "Please mark if the course is certified or not"],
+    require: [true, 'Please mark if the course is certified or not'],
   },
   difficulty: {
     type: String,
-    enum: ["BEGINNER", "INTERMEDIATE", "ADVANCED"],
-    default: "BEGINNER",
+    enum: ['BEGINNER', 'INTERMEDIATE', 'ADVANCED'],
+    default: 'BEGINNER',
   },
-  creatorID: ObjectId,
+  creatorID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Tutor',
+    required: true,
+  },
 });
 
-const Courses = mongoose.model("Courses", courseSchema);
+const Courses = mongoose.model('Courses', courseSchema);
 
 export default Courses;

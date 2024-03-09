@@ -1,5 +1,5 @@
-import express from "express";
-import { protect, restricTo } from "../controllers/userController";
+import express from 'express';
+import { protect, restricTo } from '../controllers/userController';
 import {
   createCourse,
   deleteCourse,
@@ -7,28 +7,34 @@ import {
   getAllStudentCourses,
   getAllTutorCourses,
   updateCourse,
-} from "../controllers/coursesController";
+} from '../controllers/coursesController';
 
 const router = express.Router();
 
-router.get("/courses/", protect, restricTo("STUDENT"), getAllAvailableCourses);
+router.get('/courses/', protect, restricTo('STUDENT'), getAllAvailableCourses);
 router.get(
-  "/myCourses/:id",
+  '/myCourses/:id',
   protect,
-  restricTo("STUDENT"),
+  restricTo('STUDENT'),
   getAllStudentCourses
 );
 router.get(
-  "/tutorCourses/:id",
+  '/tutorCourses/:id',
   protect,
-  restricTo("STUDENT"),
+  restricTo('STUDENT'),
   getAllTutorCourses
 );
-router.post("/createCourse/", protect, restricTo("TUTOR"), createCourse);
-router.patch("/updateCourse", protect, restricTo("TUTOR"), updateCourse);
+router.post(
+  '/createCourse',
+  //  protect, restricTo("TUTOR"),
+  createCourse
+);
+router.patch('/updateCourse', protect, restricTo('TUTOR'), updateCourse);
 router.delete(
-  "/deleteCourse/:id",
+  '/deleteCourse/:id',
   protect,
-  restricTo("TUTOR", "ADMIN"),
+  restricTo('TUTOR', 'ADMIN'),
   deleteCourse
 );
+
+export default router;

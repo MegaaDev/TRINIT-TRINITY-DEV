@@ -1,11 +1,11 @@
-import { ObjectId } from "mongodb";
-import mongoose from "mongoose";
+import { ObjectId } from 'mongodb';
+import mongoose from 'mongoose';
 
 const userEnrolledCoursesSchema = new mongoose.Schema({
-  user: { type: ObjectId, required: true, ref: "User" },
+  user: { type: ObjectId, required: true, ref: 'User' },
   enrolledCoursesArray: [
     {
-      courseID: { type: ObjectId, ref: "Courses" },
+      courseID: { type: ObjectId, ref: 'Courses' },
       courseBookedSlot: {
         Monday: [
           {
@@ -47,8 +47,8 @@ const userEnrolledCoursesSchema = new mongoose.Schema({
   ],
 });
 
-const EnrolledCourses = new mongoose.Model(
-  "EnrolledCourses",
+const EnrolledCourses = mongoose.model(
+  'EnrolledCourses',
   userEnrolledCoursesSchema
 );
 

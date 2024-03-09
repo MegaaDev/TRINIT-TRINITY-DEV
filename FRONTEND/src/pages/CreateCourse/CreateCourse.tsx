@@ -16,8 +16,27 @@ import {
 } from '@mantine/dates';
 import { useDisclosure } from '@mantine/hooks';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const CreateCourse = () => {
+  const [calenderSchedule, setCalenderSchedule] = useState<{
+    Monday: [string][];
+    Tuesday: [string][];
+    Wednesday: [string][];
+    Thursday: [string][];
+    Friday: [string][];
+    Saturday: [string][];
+    Sunday: [string][];
+  }>({
+    Monday: [],
+    Tuesday: [],
+    Wednesday: [],
+    Thursday: [],
+    Friday: [],
+    Saturday: [],
+    Sunday: [],
+  });
+
   const [languages] = useState([
     'English',
     'Spanish',
@@ -85,14 +104,17 @@ const CreateCourse = () => {
       weeklyClasses: weeklyClasses,
       startDate: startDate,
       endDate: endDate,
+      slots: calenderSchedule,
       courseDuration: courseDuration,
-      tutorId: user.id,
+      tutorId: user.user._id,
     };
 
     axios
-      .post('/api/createCourse', courseData)
+      .post('http://localhost:3000/api/courses/createCourse', courseData)
       .then((response) => {
         // handle the response here
+        toast.success('Course Created Successfully!');
+        console.log(response.data);
       })
       .catch((error) => {
         // handle the error here
@@ -199,7 +221,10 @@ const CreateCourse = () => {
           className="w-[50%] flex flex-row justify-center rounded-lg  overflow-y-scroll"
           style={{ boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.08)' }}
         >
-          <Calender />
+          <Calender
+            calenderSchedule={calenderSchedule}
+            setCalenderSchedule={setCalenderSchedule}
+          />
         </div>
       </div>
       <div className="h-[50%] w-full flex  gap-8 flex-row">

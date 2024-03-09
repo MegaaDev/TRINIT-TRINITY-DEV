@@ -60,27 +60,30 @@ function checkValidTime(newTimeSlot: [string, string]): boolean {
   return startMinutes < endMinutes;
 }
 
-const Calender: FC<CalenderProps> = ({}) => {
+const Calender: FC<CalenderProps> = ({
+  calenderSchedule,
+  setCalenderSchedule,
+}) => {
   const [opened, { open, close }] = useDisclosure(false);
   const ref = useRef<HTMLInputElement>(null);
 
-  const [calenderSchedule, setCalenderSchedule] = useState<{
-    Monday: [string][];
-    Tuesday: [string][];
-    Wednesday: [string][];
-    Thursday: [string][];
-    Friday: [string][];
-    Saturday: [string][];
-    Sunday: [string][];
-  }>({
-    Monday: [],
-    Tuesday: [],
-    Wednesday: [],
-    Thursday: [],
-    Friday: [],
-    Saturday: [],
-    Sunday: [],
-  });
+  // const [calenderSchedule, setCalenderSchedule] = useState<{
+  //   Monday: [string][];
+  //   Tuesday: [string][];
+  //   Wednesday: [string][];
+  //   Thursday: [string][];
+  //   Friday: [string][];
+  //   Saturday: [string][];
+  //   Sunday: [string][];
+  // }>({
+  //   Monday: [],
+  //   Tuesday: [],
+  //   Wednesday: [],
+  //   Thursday: [],
+  //   Friday: [],
+  //   Saturday: [],
+  //   Sunday: [],
+  // });
 
   const [slotStart, setSlotStart] = useState('');
   const [slotEnd, setSlotEnd] = useState('');
