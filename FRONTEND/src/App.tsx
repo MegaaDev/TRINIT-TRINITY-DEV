@@ -18,6 +18,8 @@ import CallRoom from './pages/CallRoom/CallRoom';
 import CourseHome from './pages/CourseHome/CourseHome';
 import CoursePage from './pages/CoursePage/CoursePage';
 import CreateCourse from './pages/CreateCourse/CreateCourse';
+import FlashCardCreate from './pages/FlashCards/FlashCardCreate';
+import ViewFlashCard from './pages/FlashCards/ViewFlashCard';
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
             <Route path="mycourses/desc/:id" element={<CourseHome />} />
             <Route path="courses" element={<BrowseCourse />} />
             <Route path="courses/:id" element={<CoursePage />} />
+            <Route path="/createFlash" element={<FlashCardCreate />} />
+            <Route path="/viewFlash" element={<ViewFlashCard />} />
             <Route
               path="myprofile"
               element={<Profile bio={'hello Pawan'} name={'Pawan Kumar'} />}
