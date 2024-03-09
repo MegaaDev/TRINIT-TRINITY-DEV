@@ -14,17 +14,17 @@ const ProfileProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   useEffect(() => {
     // Fetch profile data from the backend
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/profile');
-        const data: ProfileData = await response.json();
-        setProfileData(data);
-      } catch (error) {
-        console.error('Error fetching profile data:', error);
-      }
-    };
+    // const fetchData = async () => {
+    //   try {
+    //     const response = await fetch('http://localhost:3000/profile');
+    //     const data: ProfileData = await response.json();
+    //     setProfileData(data);
+    //   } catch (error) {
+    //     console.error('Error fetching profile data:', error);
+    //   }
+    // };
 
-    fetchData();
+    // fetchData();
   }, []);
 
   return (

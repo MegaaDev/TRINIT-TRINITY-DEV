@@ -16,6 +16,7 @@ import { ProfileProvider } from './pages/Profile/ProfileContext';
 import Profile from './pages/Profile/Profile';
 import CallRoom from './pages/CallRoom/CallRoom';
 import CourseHome from './pages/CourseHome/CourseHome';
+import CoursePage from './pages/CoursePage/CoursePage';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="mycourses/:id" element={<ManageCourse />} />
             <Route path="mycourses/desc/:id" element={<CourseHome />} />
             <Route path="courses" element={<BrowseCourse />} />
+            <Route path="courses/:id" element={<CoursePage />} />
             <Route path="myprofile" element={<Profile bio={"hello Pawan"} name={"Pawan Kumar"}/>} />
           </Route>
           <Route path="/video" element={<Video />} />

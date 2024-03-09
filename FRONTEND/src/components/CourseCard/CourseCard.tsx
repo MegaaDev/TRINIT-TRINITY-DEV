@@ -1,9 +1,13 @@
 import React, { FC } from 'react';
 import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
+import { useNavigate } from 'react-router-dom';
 
 interface CourseCardProps {}
 
 const CourseCard: FC<CourseCardProps> = ({}) => {
+
+    const navigate = useNavigate()
+
   return (
     <Card
       shadow="sm"
@@ -34,7 +38,9 @@ const CourseCard: FC<CourseCardProps> = ({}) => {
         With Fjord Tours you can explore more of the magical fjord landscapes
         with tours and activities on and around the fjords of Norway
       </Text>
-      <button className="mt-[25px] text-[16px] h-[40px] flex justify-center items-center text-white p-3 bg-[#318CE7] hover:bg-[#43a0fc] active:bg-[#3176bb] transition-all rounded-md ">
+      <button onClick={()=>{
+        navigate("/courses/123")
+      }} className="mt-[25px] text-[16px] h-[40px] flex justify-center items-center text-white p-3 bg-[#318CE7] hover:bg-[#43a0fc] active:bg-[#3176bb] transition-all rounded-md ">
         View More
       </button>
     </Card>

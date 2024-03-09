@@ -78,7 +78,7 @@ const TutorRegister: React.FC = () => {
         console.log('Registration successful:', response.data);
         toast.success('Registration successful');
         // Redirect to the next page
-        navigate('/myschedule');
+        // navigate('/myschedule');
         // window.location.href = ';
       })
       .catch((error) => {

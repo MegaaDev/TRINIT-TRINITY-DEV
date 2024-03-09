@@ -72,3 +72,16 @@ body {
 .innerScale:active img {
   transform: scale(1.1);
 }
+
+.bgBanner{
+    background: url(./assets/banner.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.activeSlot{
+    background-color: #3591e2;
+    color: #f6f6f6;
+}

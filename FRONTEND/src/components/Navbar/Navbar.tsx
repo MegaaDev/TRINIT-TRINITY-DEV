@@ -7,11 +7,11 @@ export const Navbar = () => {
   const { user, setUser } = useContext(UserContext);
   useEffect(() => {
     console.log(user);
-    if (!user || user.role !== 'ADMIN') {
+    if (!localStorage.getItem('user')) {
       navigate('/landing');
       return;
     }
-  }, []);
+  }, [user]);
 
   const UserAvatar = () => {
     if (user?.user?.username == undefined) return <></>;
@@ -30,7 +30,6 @@ export const Navbar = () => {
   const currentUrl = window.location.href.toString();
   const urlParts = currentUrl.split('/');
   const extractedString = urlParts[3];
-  const [role] = useState('');
   const [current, setCurrent] = useState('');
   console.log(extractedString);
   useEffect(() => {
@@ -48,7 +47,7 @@ export const Navbar = () => {
     }
   }, [extractedString]);
 
-  if (role == 'STUDENT') {
+  if (user?.role == 'STUDENT') {
     return (
       <div className="h-[100vh] w-[100vw] overflow-hidden flex flex-col">
         <div

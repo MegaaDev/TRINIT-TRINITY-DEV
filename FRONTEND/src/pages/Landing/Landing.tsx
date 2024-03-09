@@ -8,11 +8,11 @@ const Landing = () => {
   const { user, setUser } = useContext(UserContext);
   console.log(user);
   useEffect(() => {
-    if (!user || user.role !== 'ADMIN') {
+    if (localStorage.getItem('user')) {
       navigate('/myschedule');
       return;
     }
-  }, []);
+  }, [user]);
   return (
     <div className="h-[100vh] w-[100vw] flex flex-col overflow-hidden">
       <div
