@@ -3,49 +3,70 @@
 @import 'tailwindcss/utilities';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Width of the scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-body{
-    font-family: "Montserrat", sans-serif;
+/* Track (the area on which the thumb slides) */
+::-webkit-scrollbar-track {
+  background-color: #d4d4d4;
+}
+
+/* Handle (the draggable part of the scrollbar) */
+::-webkit-scrollbar-thumb {
+  background-color: #7272f1;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #525252;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
   font-optical-sizing: auto;
 }
 
-.boxShadow{
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+.boxShadow {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.hoverDay{
-    transition: 0.3s;
-    cursor: pointer;
+.hoverDay {
+  transition: 0.3s;
+  cursor: pointer;
 }
 
-.hoverDay:hover{
-    background-color: #2a2a2aea;
-    color: #f6f6f6;
+.hoverDay:hover {
+  background-color: #2a2a2aea;
+  color: #f6f6f6;
 }
 
-.hoverDay:active{
-    background-color: #000000;
-    color: #f6f6f6;
+.hoverDay:active {
+  background-color: #000000;
+  color: #f6f6f6;
 }
 
-.activeDay{
-    background-color: #000000;
-    color: #f6f6f6;
+.activeDay {
+  background-color: #000000;
+  color: #f6f6f6;
 }
 
-.innerScale img{
-    transition: 0.3s;
+.innerScale img {
+  transition: 0.3s;
 }
 
-.innerScale:hover img{
-    transform: scale(1.15);
+.innerScale:hover img {
+  transform: scale(1.15);
 }
 
-.innerScale:active img{
-    transform: scale(1.1);
+.innerScale:active img {
+  transform: scale(1.1);
 }
