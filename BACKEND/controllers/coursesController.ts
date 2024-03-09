@@ -1,8 +1,15 @@
+<<<<<<< HEAD
 import expressAsyncHandler from 'express-async-handler';
 import Courses from '../models/courseModel';
 import EnrolledCourses from '../models/enrolledCoursesModel';
 import mongoose, { ObjectId, Query } from 'mongoose';
 import Tutor from '../models/tutorModel';
+=======
+import expressAsyncHandler from "express-async-handler";
+import Courses from "../models/courseModel";
+import EnrolledCourses from "../models/enrolledCoursesModel";
+import stripe from "../utils/stripe";
+>>>>>>> 9cc45d0 (feat(backend): stripe integration (hopefully works :( ))
 
 const getAllTutorCourses = expressAsyncHandler(async (req: any, res) => {
   const tutorID = req.params.id;

@@ -1,37 +1,37 @@
-import Student from '../models/studentModel';
-import expressAsyncHandler from 'express-async-handler';
-import Tutor from '../models/tutorModel';
-import Courses from '../models/courseModel';
-import EnrolledCourses from '../models/enrolledCoursesModel';
-import { Timestamp } from 'mongodb';
+import Student from "../models/studentModel";
+import expressAsyncHandler from "express-async-handler";
+import Tutor from "../models/tutorModel";
+import Courses from "../models/courseModel";
+import EnrolledCourses from "../models/enrolledCoursesModel";
+import stripe from "../utils/stripe";
 
 const registerCourse = expressAsyncHandler(async (req: any, res) => {
   const { course, timeSlots, tutorId } = req.body;
   const student = await Student.findOne({ user: req.user._id });
   const selectedCourse = await Courses.findById(course);
   const enrolledCourse = await EnrolledCourses.findOne({ user: req.user_id });
-  console.log('Id    ', tutorId);
+  console.log("Id    ", tutorId);
   const tutor = await Tutor.findOne({
     user: tutorId,
   });
   if (!student) {
     res.status(404).json({
-      status: 'fail',
-      message: 'Student not found',
+      status: "fail",
+      message: "Student not found",
     });
     return;
   }
   if (!tutor) {
     res.status(404).json({
-      status: 'fail',
-      message: 'Tutor not found',
+      status: "fail",
+      message: "Tutor not found",
     });
     return;
   }
   if (!selectedCourse || !selectedCourse.duration || !selectedCourse.price) {
     res.status(404).json({
-      status: 'fail',
-      message: 'Course not found',
+      status: "fail",
+      message: "Course not found",
     });
     return;
   }
@@ -51,8 +51,8 @@ const registerCourse = expressAsyncHandler(async (req: any, res) => {
 
   if (student.credits < coursePrice) {
     res.status(400).json({
-      status: 'fail',
-      message: 'You need more credits!',
+      status: "fail",
+      message: "You need more credits!",
     });
     return;
   }
@@ -78,8 +78,8 @@ const registerCourse = expressAsyncHandler(async (req: any, res) => {
         ].includes(slot)
       ) {
         res.status(400).json({
-          status: 'fail',
-          message: 'Invalid time slot',
+          status: "fail",
+          message: "Invalid time slot",
         });
         return;
       } else {
@@ -93,7 +93,7 @@ const registerCourse = expressAsyncHandler(async (req: any, res) => {
 
   // create an entry if it does not exist, otherwise update existing entry
   if (!enrolledCourse) {
-    console.log(timeSlots, 'timeSlots');
+    console.log(timeSlots, "timeSlots");
     await EnrolledCourses.create({
       user: req.user._id,
       enrolledCoursesArray: [{ courseID: course, courseBookedSlot: timeSlots }],
@@ -113,7 +113,7 @@ const registerCourse = expressAsyncHandler(async (req: any, res) => {
   await selectedCourse.save();
   await student.save();
   res.status(200).json({
-    status: 'success',
+    status: "success",
     student,
   });
 });
