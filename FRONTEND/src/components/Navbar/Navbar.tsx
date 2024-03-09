@@ -23,7 +23,7 @@ export const Navbar = () => {
     }
   }, [extractedString]);
 
-  if (role == '') {
+  if (role == 'STUDENT') {
     return (
       <div className="h-[100vh] w-[100vw] overflow-hidden flex flex-col">
         <div
@@ -63,7 +63,7 @@ export const Navbar = () => {
                       : 'text-[#838383]'
                   }`}
                   onClick={(e) => {
-                    window.location.href = '/browse';
+                    window.location.href = '/courses';
                     const target = e.target as HTMLElement;
                     setCurrent(`${target.innerHTML}`);
                   }}

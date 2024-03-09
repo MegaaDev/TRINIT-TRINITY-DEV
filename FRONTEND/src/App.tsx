@@ -6,6 +6,7 @@ import Schedule from './components/Schedule/Schedule';
 import '@mantine/core/styles.css';
 import BrowseCourse from './components/BrowseCourses/BrowseCourse';
 import Video from './pages/Video/Video';
+import ManageCourse from './components/ManageCourse/ManageCourse';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route index element={<Schedule />} />
           <Route path="myschedule" element={<Schedule />} />
           <Route path="mycourses" element={<Courses />} />
+          <Route path="mycourses/:id" element={<ManageCourse />} />
           <Route path="courses" element={<BrowseCourse />} />
         </Route>
         <Route path="/video" element={<Video />}></Route>
