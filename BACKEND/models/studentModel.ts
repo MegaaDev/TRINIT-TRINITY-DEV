@@ -8,20 +8,24 @@ const studentSchema = new mongoose.Schema({
   },
   tutorsRegistered: [
     {
-        tutor:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Tutor",
-        },
-        plan:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Plan",
-        },
-        expiresIn:Date,
-},
+      tutor: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Tutor",
+      },
+      plan: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Plan",
+      },
+      expiresIn: Date,
+    },
   ],
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+  credits: {
+    type: Number,
+    default: 100,
   },
 });
 
