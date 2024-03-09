@@ -6,7 +6,7 @@ const tutorSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  language: {
+  languages: {
     type: [String],
     // required: [true, 'Please enter the language you want to teach'],
   },

@@ -23,7 +23,7 @@ const login = expressAsyncHandler(async (req, res) => {
 
   res
     .status(200)
-    .cookie('ospbl', token, {
+    .cookie('trinity', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV !== 'development',
     })
@@ -60,11 +60,19 @@ const register = expressAsyncHandler(async (req, res) => {
   if (process.env.ENV != 'DEV') {
     user.password = '';
   }
-
-  res.status(201).json({
-    status: 'success',
-    user,
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET as string, {
+    expiresIn: '30d',
   });
+  res
+    .status(200)
+    .cookie('trinity', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== 'development',
+    })
+    .json({
+      status: 'success',
+      user,
+    });
 });
 
 const logout = expressAsyncHandler(async (req, res) => {

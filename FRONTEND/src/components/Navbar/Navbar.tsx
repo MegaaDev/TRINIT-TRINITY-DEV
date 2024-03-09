@@ -1,7 +1,32 @@
-import { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { UserContext } from '../../Context/UserContextProvider';
 
 export const Navbar = () => {
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
+  console.log(user);
+  // useEffect(() => {
+  //   if (!user || user.role !== 'ADMIN') {
+  //     navigate('/landing');
+  //     return;
+  //   }
+  // }, []);
+
+  const UserAvatar = () => {
+    if (user?.user?.username == undefined) return <></>;
+    const firstLetter = user.user.username.charAt(0).toUpperCase();
+    // const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+    return (
+      <div
+        className="h-[40px] w-[40px] rounded-[50%] flex flex-row justify-center items-center bg-customBlue"
+        // style={{ backgroundColor: randomColor }}
+      >
+        <p className="text-white font-semibold">{firstLetter}</p>
+      </div>
+    );
+  };
   const currentUrl = window.location.href.toString();
   const urlParts = currentUrl.split('/');
   const extractedString = urlParts[3];
@@ -34,7 +59,7 @@ export const Navbar = () => {
             LINGUACONNECT
           </h1>
 
-          <div className="w-[40px] h-[40px] rounded-[50%] bg-[#7272f1]"></div>
+          <UserAvatar />
         </div>
         <div className="h-[calc(100%-100px)] w-full flex flex-row">
           <div className="h-[100%] w-[15%] min-w-[250px] bg-[#ffffff] px-10 pt-[40px] pb-[80px] text-left">
@@ -93,7 +118,7 @@ export const Navbar = () => {
             LINGUACONNECT
           </h1>
 
-          <div className="w-[40px] h-[40px] rounded-[50%] bg-[#7272f1]"></div>
+          <UserAvatar />
         </div>
         <div className="h-full max-h-full overflow-hidden w-full flex flex-row">
           <div className="h-[100%] w-[15%] min-w-[250px] bg-[#ffffff] px-10 pt-[40px] pb-[80px] text-left">

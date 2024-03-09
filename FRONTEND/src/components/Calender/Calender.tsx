@@ -133,7 +133,7 @@ const Calender: FC<CalenderProps> = ({}) => {
   );
 
   return (
-    <div className=" rounded-[10px] p-2 w-[800px] ">
+    <div className=" rounded-[10px] p-2 w-[800px] overflow-hidden">
       <Modal
         opened={opened}
         onClose={close}
@@ -204,7 +204,7 @@ const Calender: FC<CalenderProps> = ({}) => {
         </div>
       </Modal>
       <div className=" rounded-[10px]  flex flex-col h-full">
-        <div className="w-full rounded-[5px] h-[60px] -2 pl-3 pr-3 flex items-center justify-between text-[22px] ">
+        <div className="w-full rounded-[5px] h-[60px] -2 pl-3 pr-3 flex items-center justify-between text-[22px] overflow-hidden ">
           <div>Course Schedule</div>
           <div>
             <button
@@ -215,8 +215,8 @@ const Calender: FC<CalenderProps> = ({}) => {
             </button>
           </div>
         </div>
-        <div className="w-full h-full flex">
-          <div className="w-[25%] h-full border-r-2 ">
+        <div className="w-full h-full flex overflow-hidden">
+          <div className="w-[25%] h-full border-r-2 overflow-hidden ">
             {Object.keys(calenderSchedule).map((day, index) => {
               return (
                 <div
@@ -228,7 +228,7 @@ const Calender: FC<CalenderProps> = ({}) => {
               );
             })}
           </div>
-          <div className="w-[75%]">
+          <div className="w-[75%] overflow-hidden">
             {Object.keys(calenderSchedule).map((day, index) => {
               const dayKey = day as keyof typeof calenderSchedule;
               return (
@@ -239,7 +239,7 @@ const Calender: FC<CalenderProps> = ({}) => {
                   {calenderSchedule[dayKey].length > 0 ? (
                     calenderSchedule[dayKey].map((slot, index) => {
                       return (
-                        <div className="rounded bg-[#1C7ED6] text-white p-1 text-[14px] text-center">
+                        <div className="rounded bg-[#1C7ED6] min-w-[150px] text-white p-1 text-[14px] text-center">
                           <span key={index} className="text-[16px]">
                             {slot[0]} - {slot[1]}
                           </span>

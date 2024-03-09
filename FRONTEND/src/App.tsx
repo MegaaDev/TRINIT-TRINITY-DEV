@@ -7,11 +7,17 @@ import '@mantine/core/styles.css';
 import BrowseCourse from './components/BrowseCourses/BrowseCourse';
 import Video from './pages/Video/Video';
 import ManageCourse from './components/ManageCourse/ManageCourse';
+import Landing from './pages/Landing/Landing';
+import Getstarted from './pages/Getstarted/Getstarted';
+import TutorRegister from './pages/TutorRegister/TutorRegister';
 
 function App() {
   return (
     <div className="h-[100vh] w-[100vw]">
       <Routes>
+        <Route path="/landing" element={<Landing />} />
+        <Route path="/getstarted" element={<Getstarted />} />
+        <Route path="/tutorregister" element={<TutorRegister />} />
         <Route path="/" element={<Navbar />}>
           <Route index element={<Schedule />} />
           <Route path="myschedule" element={<Schedule />} />

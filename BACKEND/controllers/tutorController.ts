@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Tutor from '../models/tutorModel';
+import { Types } from 'mongoose';
+import User from '../models/userModel';
 
 const isTutor = expressAsyncHandler(
   async (req: any, res: Response, next: any) => {
@@ -62,8 +64,10 @@ const getTutorById = expressAsyncHandler(async (req, res) => {
 });
 
 const updateTutor = expressAsyncHandler(async (req: any, res) => {
-  const tutor = await Tutor.findById(req.user._id);
-  const { language, bio, experience } = req.body;
+  console.log(req.params.id, 'id');
+  // const tutor = await Tutor.findOne({ user: req.params.id });
+  const tutor = await Tutor.findOne({ user: req.params.id }).populate('user');
+  const { languages, bio, experience } = req.body;
   if (!tutor) {
     res.status(404).json({
       status: 'fail',
@@ -71,7 +75,7 @@ const updateTutor = expressAsyncHandler(async (req: any, res) => {
     });
     return;
   }
-  tutor.language = language;
+  tutor.languages = languages;
   tutor.bio = bio;
   // tutor.resume = resume;
   tutor.experience = experience;
