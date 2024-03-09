@@ -24,7 +24,12 @@ const LearnerRegister: React.FC = () => {
     e.preventDefault();
     // Implement your registration logic here
     axios
-      .post('http://localhost:3000/api/users/register', formData)
+      .post('http://localhost:3000/api/users/register', formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      })
       .then((res) => {
         setUser(res.data.user);
         localStorage.setItem('user', JSON.stringify(res.data.user));

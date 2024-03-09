@@ -37,7 +37,7 @@ const CoursePage: FC<CoursePageProps> = ({}) => {
     Saturday: number[];
     Sunday: number[];
   }>({
-    Monday: [0],
+    Monday: [],
     Tuesday: [],
     Wednesday: [],
     Thursday: [],
@@ -55,7 +55,7 @@ const CoursePage: FC<CoursePageProps> = ({}) => {
     Saturday: number[];
     Sunday: number[];
   }>({
-    Monday: [1],
+    Monday: [],
     Tuesday: [],
     Wednesday: [],
     Thursday: [],
@@ -68,21 +68,51 @@ const CoursePage: FC<CoursePageProps> = ({}) => {
 
   const [opened, { open, close }] = useDisclosure(false);
 
-  const [course, setCourse] = useState({});
+  const [course, setCourse] = useState();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/courses/${id}`)
+      .get(`http://localhost:3000/api/courses/${id}`, {
+        withCredentials: true,
+      })
       .then((response) => {
         // Handle the response data here
         console.log(response.data);
         setCourse(response.data.course);
+        setCalenderSchedule(response.data.course.slots);
+        console.log(response.data.course.bookedSlots);
+        setBookedSlots(response.data.course.bookedSlots);
       })
       .catch((error) => {
         // Handle the error here
         console.error(error);
       });
   }, []);
+
+  const handleCourseBooking = () => {
+    axios
+      .post(
+        `http://localhost:3000/api/student/registerCourse`,
+        {
+          selectedSlots,
+          course: id,
+          tutorId: course?.creatorID?._id,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((response) => {
+        // Handle the response data here
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // Handle the error here
+        console.error(error);
+      });
+  };
+
+  if (!course) return <div>Loading...</div>;
 
   return (
     <div className="h-full w-full p-10">
@@ -101,6 +131,7 @@ const CoursePage: FC<CoursePageProps> = ({}) => {
             <div>
               <button
                 onClick={() => {
+                  handleCourseBooking();
                   close();
                 }}
                 className="bg-[#37ac5e] py-1 px-4 rounded-md hover:bg-[#4cd57a] active:bg-[#37b460] transition-all"

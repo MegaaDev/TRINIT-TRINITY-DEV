@@ -110,7 +110,9 @@ const CreateCourse = () => {
     };
 
     axios
-      .post('http://localhost:3000/api/courses/createCourse', courseData)
+      .post('http://localhost:3000/api/courses/createCourse', courseData, {
+        withCredentials: true,
+      })
       .then((response) => {
         // handle the response here
         toast.success('Course Created Successfully!');

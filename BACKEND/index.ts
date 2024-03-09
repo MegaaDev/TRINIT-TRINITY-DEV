@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import connectDatabase from './utils/connectDatabase';
 import userRouter from './routes/userRouter';
 import tutorRuter from './routes/tutorRoutes';
+import studentRouter from './routes/studentRoutes';
 import courseRouter from './routes/coursesRouter';
 import { errorHandler, notFoundErr } from './middleware/errorHandler';
 import { protect, restricTo } from './controllers/userController';
@@ -36,6 +37,7 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/api/users', userRouter);
 app.use('/api/users/tutor', tutorRuter);
 app.use('/api/courses', courseRouter);
+app.use('/api/student', studentRouter);
 
 app.use('/test', protect, restricTo('ADMIN'), (req, res) => {
   res.status(200).json({

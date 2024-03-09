@@ -46,7 +46,9 @@ const TutorRegister: React.FC = () => {
   };
   const handleSubmit = (e: React.FormEvent) => {
     axios
-      .post('http://localhost:3000/api/users/register', formData)
+      .post('http://localhost:3000/api/users/register', formData, {
+        withCredentials: true,
+      })
       .then((response) => {
         // Handle the response here
         console.log('Registration successful:', response.data);
@@ -69,7 +71,13 @@ const TutorRegister: React.FC = () => {
   const handleSubmitUpdate = (e: React.FormEvent) => {
     e.preventDefault();
     axios
-      .patch(`http://localhost:3000/api/users/tutor/${userId}`, formDataUpdate)
+      .patch(
+        `http://localhost:3000/api/users/tutor/${userId}`,
+        formDataUpdate,
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         // Handle the response here
         const user = response.data.tutor;

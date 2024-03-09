@@ -63,6 +63,7 @@ const register = expressAsyncHandler(async (req, res) => {
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET as string, {
     expiresIn: '30d',
   });
+  console.log(token);
   const student = await Student.findOne({ user: user._id }).populate('user');
   console.log(student);
   res
@@ -70,6 +71,7 @@ const register = expressAsyncHandler(async (req, res) => {
     .cookie('trinity', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV !== 'development',
+      expires: new Date(Date.now() + 900000000),
     })
     .json({
       status: 'success',
@@ -98,8 +100,8 @@ const protect = expressAsyncHandler(async (req: any, res, next) => {
   ) {
     token = req.headers.authorization.split(' ')[1];
   }
-  if (req.cookies.ospbl) {
-    token = req.cookies.ospbl;
+  if (req.cookies.trinity) {
+    token = req.cookies.trinity;
   }
   if (!token) {
     res.status(401).json({

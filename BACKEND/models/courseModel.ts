@@ -85,57 +85,57 @@ const courseSchema = new mongoose.Schema({
       ],
     ],
   },
-  // bookedSlots: {
-  //   Monday: [
-  //     [
-  //       {
-  //         type: String,
-  //       },
-  //     ],
-  //   ],
-  //   Tuesday: [
-  //     [
-  //       {
-  //         type: String,
-  //       },
-  //     ],
-  //   ],
-  //   Wednesday: [
-  //     [
-  //       {
-  //         type: String,
-  //       },
-  //     ],
-  //   ],
-  //   Thursday: [
-  //     [
-  //       {
-  //         type: String,
-  //       },
-  //     ],
-  //   ],
-  //   Friday: [
-  //     [
-  //       {
-  //         type: String,
-  //       },
-  //     ],
-  //   ],
-  //   Saturday: [
-  //     [
-  //       {
-  //         type: String,
-  //       },
-  //     ],
-  //   ],
-  //   Sunday: [
-  //     [
-  //       {
-  //         type: String,
-  //       },
-  //     ],
-  //   ],
-  // },
+  bookedSlots: {
+    Monday: [
+      [
+        {
+          type: Number,
+        },
+      ],
+    ],
+    Tuesday: [
+      [
+        {
+          type: Number,
+        },
+      ],
+    ],
+    Wednesday: [
+      [
+        {
+          type: Number,
+        },
+      ],
+    ],
+    Thursday: [
+      [
+        {
+          type: Number,
+        },
+      ],
+    ],
+    Friday: [
+      [
+        {
+          type: Number,
+        },
+      ],
+    ],
+    Saturday: [
+      [
+        {
+          type: Number,
+        },
+      ],
+    ],
+    Sunday: [
+      [
+        {
+          type: Number,
+        },
+      ],
+    ],
+  },
   certified: {
     type: Boolean,
     require: [true, 'Please mark if the course is certified or not'],
