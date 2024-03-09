@@ -1,8 +1,15 @@
 import { useContext, useEffect, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../Context/UserContextProvider';
+import Wallet from '../../pages/Wallet/Wallet';
 
 export const Navbar = () => {
+
+  const [showWallet, setShowWallet] = useState(false);
+  const toggleWallet = () => {
+    setShowWallet(!showWallet);
+  };
+
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
   useEffect(() => {
@@ -17,16 +24,17 @@ export const Navbar = () => {
     if (user?.user?.username == undefined) return <></>;
     const firstLetter = user.user.username.charAt(0).toUpperCase();
     // const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-
     return (
-      <div
-        className="h-[40px] w-[40px] rounded-[50%] flex flex-row justify-center items-center bg-customBlue"
-        // style={{ backgroundColor: randomColor }}
-      >
-        <p className="text-white font-semibold">{firstLetter}</p>
-      </div>
+      <Link to="/myprofile">
+        <div
+          className="h-[40px] w-[40px] rounded-[50%] flex flex-row justify-center items-center bg-customBlue"
+        >
+          <p className="text-white font-semibold">{firstLetter}</p>
+        </div>
+      </Link>
     );
   };
+
   const currentUrl = window.location.href.toString();
   const urlParts = currentUrl.split('/');
   const extractedString = urlParts[3];
@@ -57,7 +65,6 @@ export const Navbar = () => {
           <h1 className="font-extrabold text-2xl text-[#7272f1]">
             LINGUACONNECT
           </h1>
-
           <UserAvatar />
         </div>
         <div className="h-[calc(100%-100px)] w-full flex flex-row">
@@ -66,11 +73,10 @@ export const Navbar = () => {
             <div className="h-full w-full flex flex-col justify-between text-left">
               <div className="w-full h-fit flex flex-col gap-3">
                 <div
-                  className={`h-[40px] w-full flex items-center cursor-pointer font-medium ${
-                    current == 'My Courses'
-                      ? 'text-[#7272f1]'
-                      : 'text-[#838383]'
-                  }`}
+                  className={`h-[40px] w-full flex items-center cursor-pointer font-medium ${current == 'My Courses'
+                    ? 'text-[#7272f1]'
+                    : 'text-[#838383]'
+                    }`}
                   onClick={(e) => {
                     window.location.href = '/mycourses';
                     const target = e.target as HTMLElement;
@@ -81,11 +87,10 @@ export const Navbar = () => {
                   My Courses
                 </div>
                 <div
-                  className={`h-[40px] w-full flex items-center cursor-pointer  font-medium ${
-                    current == 'Browse Courses'
-                      ? 'text-[#7272f1]'
-                      : 'text-[#838383]'
-                  }`}
+                  className={`h-[40px] w-full flex items-center cursor-pointer  font-medium ${current == 'Browse Courses'
+                    ? 'text-[#7272f1]'
+                    : 'text-[#838383]'
+                    }`}
                   onClick={(e) => {
                     window.location.href = '/courses';
                     const target = e.target as HTMLElement;
@@ -119,20 +124,31 @@ export const Navbar = () => {
           <h1 className="font-extrabold text-2xl text-[#7272f1]">
             LINGUACONNECT
           </h1>
-
+          <div style={{display:"flex" , gap:"20%"}}>
+          <img
+            onClick={toggleWallet}
+            style={{ width: '35px', height: '35px' }}
+            src='./src/assets/wallet.svg'
+            alt="Wallet"
+          />
           <UserAvatar />
+          </div>
         </div>
+        {showWallet && (
+          <div style={{ position: 'absolute', top: '15%', left: '80%', backgroundColor: '#ffffff', padding: '10px', borderRadius: '5px', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}>
+            <Wallet balance={500} />
+          </div>
+        )}
         <div className="h-full max-h-full overflow-hidden w-full flex flex-row">
           <div className="h-[100%] w-[15%] min-w-[250px] bg-[#ffffff] px-10 pt-[40px] pb-[80px] text-left">
             <h1 className="font-bold text-2xl mb-5">Dashboard</h1>
             <div className="h-full max-h-[100%] w-full flex flex-col justify-between text-left">
               <div className="w-full h-fit flex flex-col gap-3">
                 <div
-                  className={`h-[40px] w-full flex items-center cursor-pointer  font-medium ${
-                    current == 'My Schedule'
-                      ? 'text-[#7272f1]'
-                      : 'text-[#838383]'
-                  }`}
+                  className={`h-[40px] w-full flex items-center cursor-pointer  font-medium ${current == 'My Schedule'
+                    ? 'text-[#7272f1]'
+                    : 'text-[#838383]'
+                    }`}
                   onClick={(e) => {
                     window.location.href = '/myschedule';
                     const target = e.target as HTMLElement;
@@ -143,11 +159,10 @@ export const Navbar = () => {
                   My Schedule
                 </div>
                 <div
-                  className={`h-[40px] w-full flex items-center cursor-pointer font-medium ${
-                    current == 'Manage Courses'
-                      ? 'text-[#7272f1]'
-                      : 'text-[#838383]'
-                  }`}
+                  className={`h-[40px] w-full flex items-center cursor-pointer font-medium ${current == 'Manage Courses'
+                    ? 'text-[#7272f1]'
+                    : 'text-[#838383]'
+                    }`}
                   onClick={(e) => {
                     window.location.href = '/mycourses';
                     const target = e.target as HTMLElement;
