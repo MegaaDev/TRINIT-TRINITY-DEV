@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
-import axios from 'axios'
+import axios from 'axios';
 import { UserContext } from '../../Context/UserContextProvider';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,32 +8,33 @@ const LearnerRegister: React.FC = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    role:'STUDENT',
+    role: 'STUDENT',
     email: '',
   });
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const {setUser} = useContext(UserContext)
+  const { setUser } = useContext(UserContext);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Implement your registration logic here
     axios
-      .post('http://localhost:3000/api/users/register', formData).then((res)=>{
-        setUser(res.data.user)
-        localStorage.setItem("user", JSON.stringify(res.data.user))
+      .post('http://localhost:3000/api/users/register', formData)
+      .then((res) => {
+        setUser(res.data.user);
+        localStorage.setItem('user', JSON.stringify(res.data.user));
         toast.success('Registration successful!');
-    navigate('/myschedule');
-
-      }).catch((err)=>{
-        toast.error("Something went Wrong");
-        console.log(err)
+        navigate('/mycourses');
       })
+      .catch((err) => {
+        toast.error('Something went Wrong');
+        console.log(err);
+      });
     console.log('Form Data:', formData);
 
     // For demonstration purposes, you can show a toast message

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Select, TagsInput, Textarea } from '@mantine/core';
 import { NumberInput } from '@mantine/core';
 import { UserContext } from '../../Context/UserContextProvider';
@@ -15,8 +15,8 @@ const TutorRegister: React.FC = () => {
     password: '',
   });
   const [formDataUpdate, setFormDataUpdate] = useState({
-    Experience: 0,
-    Languages: [''],
+    experience: 0,
+    languages: [''],
     bio: '',
   });
 
@@ -31,7 +31,7 @@ const TutorRegister: React.FC = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
   const handleInputChangeUpdate = (value) => {
-    setFormData((prevData) => ({ ...prevData, ['Experience']: value }));
+    setFormData((prevData) => ({ ...prevData, ['experience']: value }));
   };
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -78,7 +78,7 @@ const TutorRegister: React.FC = () => {
         console.log('Registration successful:', response.data);
         toast.success('Registration successful');
         // Redirect to the next page
-        // navigate('/myschedule');
+        navigate('/myschedule');
         // window.location.href = ';
       })
       .catch((error) => {
@@ -90,7 +90,7 @@ const TutorRegister: React.FC = () => {
     setStatus(true);
     console.log('Form Data:', formDataUpdate);
   };
-  const [languages] = useState([
+  const [Lang] = useState([
     'English',
     'Spanish',
     'French',
@@ -197,7 +197,7 @@ const TutorRegister: React.FC = () => {
                   console.log(value);
                   setFormDataUpdate((prevData) => ({
                     ...prevData,
-                    Experience: Number(value),
+                    experience: Number(value),
                   }));
                 }}
               />
@@ -206,13 +206,13 @@ const TutorRegister: React.FC = () => {
               <TagsInput
                 label="Languages Known"
                 placeholder="Select languages"
-                data={languages}
+                data={Lang}
                 maxDropdownHeight={200}
                 onChange={(selectedOptions) => {
                   console.log(selectedOptions);
                   setFormDataUpdate((prevData) => ({
                     ...prevData,
-                    Languages: selectedOptions,
+                    languages: selectedOptions,
                   }));
                 }}
               />{' '}
@@ -233,7 +233,7 @@ const TutorRegister: React.FC = () => {
               type="submit"
               className="bg-blue-500 text-white py-2 px-4 rounded-md"
               onClick={() => {
-                window.location.href = '/myschedule';
+                // window.location.href = '/myschedule';
               }}
             >
               Register

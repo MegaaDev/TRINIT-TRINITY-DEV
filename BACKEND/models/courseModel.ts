@@ -85,6 +85,57 @@ const courseSchema = new mongoose.Schema({
       ],
     ],
   },
+  // bookedSlots: {
+  //   Monday: [
+  //     [
+  //       {
+  //         type: String,
+  //       },
+  //     ],
+  //   ],
+  //   Tuesday: [
+  //     [
+  //       {
+  //         type: String,
+  //       },
+  //     ],
+  //   ],
+  //   Wednesday: [
+  //     [
+  //       {
+  //         type: String,
+  //       },
+  //     ],
+  //   ],
+  //   Thursday: [
+  //     [
+  //       {
+  //         type: String,
+  //       },
+  //     ],
+  //   ],
+  //   Friday: [
+  //     [
+  //       {
+  //         type: String,
+  //       },
+  //     ],
+  //   ],
+  //   Saturday: [
+  //     [
+  //       {
+  //         type: String,
+  //       },
+  //     ],
+  //   ],
+  //   Sunday: [
+  //     [
+  //       {
+  //         type: String,
+  //       },
+  //     ],
+  //   ],
+  // },
   certified: {
     type: Boolean,
     require: [true, 'Please mark if the course is certified or not'],
@@ -96,7 +147,7 @@ const courseSchema = new mongoose.Schema({
   },
   creatorID: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Tutor',
+    ref: 'User',
     required: true,
   },
 });

@@ -13,10 +13,10 @@ export const Navbar = () => {
   const { user, setUser } = useContext(UserContext);
   useEffect(() => {
     console.log(user);
-    if (!localStorage.getItem('user')) {
-      navigate('/landing');
-      return;
-    }
+    // if (!localStorage.getItem('user')) {
+    //   navigate('/landing');
+    //   return;
+    // }
   }, [user]);
 
   const UserAvatar = () => {
@@ -52,7 +52,7 @@ export const Navbar = () => {
     }
   }, [extractedString]);
 
-  if (user?.role == 'STUDENT') {
+  if (user?.user?.role == 'STUDENT') {
     return (
       <div className="h-[100vh] w-[100vw] overflow-hidden flex flex-col">
         <div
@@ -62,8 +62,33 @@ export const Navbar = () => {
           <h1 className="font-extrabold text-2xl text-[#7272f1]">
             LINGUACONNECT
           </h1>
-          <UserAvatar />
+          <div className="flex flex-row items-center gap-[20%]">
+            <img
+              className="cursor-pointer"
+              onClick={toggleWallet}
+              style={{ width: '35px', height: '35px' }}
+              src="./src/assets/wallet.svg"
+              alt="Wallet"
+            />
+            <UserAvatar />
+          </div>
         </div>
+        {showWallet && (
+          <div
+            style={{
+              position: 'absolute',
+              top: '10%',
+              left: '80%',
+              backgroundColor: '#ffffff',
+              padding: '10px',
+              borderRadius: '5px',
+              boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+              zIndex: 100,
+            }}
+          >
+            <Wallet balance={500} />
+          </div>
+        )}
         <div className="h-[calc(100%-100px)] w-full flex flex-row">
           <div className="h-[100%] w-[15%] min-w-[250px] bg-[#ffffff] px-10 pt-[40px] pb-[80px] text-left">
             <h1 className="font-bold text-2xl mb-5">Dashboard</h1>
@@ -132,21 +157,7 @@ export const Navbar = () => {
 
           <UserAvatar />
         </div>
-        {showWallet && (
-          <div
-            style={{
-              position: 'absolute',
-              top: '15%',
-              left: '80%',
-              backgroundColor: '#ffffff',
-              padding: '10px',
-              borderRadius: '5px',
-              boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-            }}
-          >
-            <Wallet balance={500} />
-          </div>
-        )}
+
         <div className="h-full max-h-full overflow-hidden w-full flex flex-row">
           <div className="h-[100%] w-[15%] min-w-[250px] bg-[#ffffff] px-10 pt-[40px] pb-[80px] text-left">
             <h1 className="font-bold text-2xl mb-5">Dashboard</h1>

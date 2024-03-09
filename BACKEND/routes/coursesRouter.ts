@@ -7,21 +7,25 @@ import {
   getAllStudentCourses,
   getAllTutorCourses,
   updateCourse,
+  getCourseById,
 } from '../controllers/coursesController';
 
 const router = express.Router();
 
-router.get('/courses/', protect, restricTo('STUDENT'), getAllAvailableCourses);
 router.get(
-  '/myCourses/:id',
-  protect,
-  restricTo('STUDENT'),
-  getAllStudentCourses
+  '/',
+  // protect, restricTo('STUDENT'),
+  getAllAvailableCourses
+);
+router.get(
+  '/:id',
+  //  protect, restricTo('STUDENT'),
+  getCourseById
 );
 router.get(
   '/tutorCourses/:id',
-  protect,
-  restricTo('STUDENT'),
+  // protect,
+  // restricTo('STUDENT'),
   getAllTutorCourses
 );
 router.post(

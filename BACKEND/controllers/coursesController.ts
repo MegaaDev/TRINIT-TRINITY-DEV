@@ -20,6 +20,26 @@ const getAllTutorCourses = expressAsyncHandler(async (req: any, res) => {
   }
 });
 
+const getCourseById = expressAsyncHandler(async (req: any, res) => {
+  const courseID = req.params.id;
+  console.log(new mongoose.Schema.ObjectId(courseID));
+  const course = await Courses.findOne({
+    _id: new mongoose.Types.ObjectId(courseID),
+  }).populate('creatorID');
+  console.log(course);
+  if (!course) {
+    res.status(404).json({
+      status: 'failure',
+      message: 'Course not found',
+    });
+  } else {
+    res.status(200).json({
+      status: 'success',
+      course,
+    });
+  }
+});
+
 const getAllStudentCourses = expressAsyncHandler(async (req: any, res) => {
   const studentID = req.params.id;
   const enrolledCourses = await EnrolledCourses.findOne({
@@ -121,4 +141,5 @@ export {
   createCourse,
   updateCourse,
   deleteCourse,
+  getCourseById,
 };
