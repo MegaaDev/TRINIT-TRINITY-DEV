@@ -150,7 +150,6 @@ const Calender: FC<CalenderProps> = ({}) => {
               <TimeInput
                 ref={ref}
                 className="w-[40%]"
-                step={'00:15'}
                 value={slotStart}
                 onChange={(e) => {
                   setSlotStart(e.target.value);
@@ -195,7 +194,7 @@ const Calender: FC<CalenderProps> = ({}) => {
           </div>
           <div className="w-full flex justify-end items-center">
             <button
-              className="text-[16px] h-[40px] flex justify-center items-center text-white p-3 bg-customBlue hover:bg-customBlue active:bg-[#3176bb] transition-all rounded-sm"
+              className="text-[16px] h-[40px] flex justify-center items-center text-white p-3 bg-customBlue hover:bg-customBlue active:bg-customBlue transition-all rounded-sm"
               onClick={handleSlotCreation}
             >
               Confirm
@@ -204,12 +203,12 @@ const Calender: FC<CalenderProps> = ({}) => {
         </div>
       </Modal>
       <div className=" rounded-[10px]  flex flex-col h-full">
-        <div className="w-full rounded-[5px] h-[60px] -2 pl-3 pr-3 flex items-center justify-between text-[22px] overflow-hidden ">
+        <div className="w-full rounded-[5px] h-[60px] -2 pl-3 pr-3 flex items-center justify-between font-semibold text-customBlue text-[22px] overflow-hidden ">
           <div>Course Schedule</div>
           <div>
             <button
               onClick={open}
-              className="text-[16px] h-[40px] flex justify-center items-center rounded-lg text-white p-3 bg-black hover:bg-[#4b4b4b] active:bg-[#5a5a5a] transition-all rounded-sm "
+              className="text-[16px] h-[40px] flex justify-center items-center rounded-md text-white p-3 bg-black hover:bg-[#4b4b4b] active:bg-[#5a5a5a] transition-all"
             >
               Create a Slot
             </button>
@@ -239,8 +238,11 @@ const Calender: FC<CalenderProps> = ({}) => {
                   {calenderSchedule[dayKey].length > 0 ? (
                     calenderSchedule[dayKey].map((slot, index) => {
                       return (
-                        <div className="rounded bg-[#1C7ED6] min-w-[150px] text-white p-1 text-[14px] text-center">
-                          <span key={index} className="text-[16px]">
+                        <div className="rounded bg-customBlue min-w-[120px] text-white p-1 text-[14px] text-center">
+                          <span
+                            key={index}
+                            className="text-[14px] font-semibold"
+                          >
                             {slot[0]} - {slot[1]}
                           </span>
                         </div>
