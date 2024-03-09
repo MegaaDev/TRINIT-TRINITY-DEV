@@ -10,7 +10,7 @@ const Courses = () => {
           onClick={() => {
             navigate('/createcourse');
           }}
-          className="h-[50px] w-[180px] rounded-md bg-customBlue text-lg flex justify-center items-center font-semibold text-white"
+          className="h-[50px] w-[180px] cursor-pointer rounded-md bg-customBlue text-lg flex justify-center items-center font-semibold text-white"
         >
           Create a course
         </div>

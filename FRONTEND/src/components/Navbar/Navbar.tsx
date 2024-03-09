@@ -98,6 +98,9 @@ export const Navbar = () => {
               <div className="w-full h-fit  flex flex-col gap-5">
                 <div className="h-[40px] w-full flex items-center cursor-pointer   text-[#838383] font-medium">
                   Help and Support
+                </div>{' '}
+                <div className="h-[40px] w-full flex items-center cursor-pointer   text-[#838383] font-medium">
+                  Logout
                 </div>
               </div>
             </div>
@@ -157,6 +160,9 @@ export const Navbar = () => {
               <div className="w-full h-fit  flex flex-col gap-5">
                 <div className="h-[40px] w-full flex items-center cursor-pointer   text-[#838383] font-medium">
                   Help and Support
+                </div>
+                <div className="h-[40px] w-full flex items-center cursor-pointer   text-[#838383] font-medium">
+                  Logout
                 </div>
               </div>
             </div>
