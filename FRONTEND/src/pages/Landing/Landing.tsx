@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import LandingImage from './../../../public/landing.png';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../Context/UserContextProvider';
 const Landing = () => {
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
+  console.log(user);
+  useEffect(() => {
+    if (!user || user.role !== 'ADMIN') {
+      navigate('/myschedule');
+      return;
+    }
+  }, []);
   return (
     <div className="h-[100vh] w-[100vw] flex flex-col overflow-hidden">
       <div

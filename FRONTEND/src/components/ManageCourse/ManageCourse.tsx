@@ -1,9 +1,13 @@
 import Calender from '../Calender/Calender';
 import Edit from './../../../public/edit.png';
 import Done from './../../../public/done.png';
-import { useState } from 'react';
+import { UserContext } from '../../Context/UserContextProvider';
+import { useContext, useState } from 'react';
 
 const Courses = () => {
+  const { user, setUser } = useContext(UserContext);
+
+  console.log(user);
   const [description, setDescription] = useState(
     "Learn German in this intensive crash course  to help you quickly grasp the fundamentals of the language. Whether you're a beginner or have some prior knowledge, this course will cover essential vocabulary,grammar, and conversational skills"
   );
@@ -85,14 +89,14 @@ const Courses = () => {
           <DefaultDesc setDescription={setDescription} />
         </div>
         <div
-          className="w-[50%] flex flex-row justify-center rounded-lg  "
+          className="w-[50%] flex flex-row justify-center rounded-lg  overflow-y-scroll"
           style={{ boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.08)' }}
         >
           <Calender />
         </div>
       </div>
       <div
-        className="h-[50%] w-full p-10 overflow-hidden"
+        className="h-[50%] w-full px-10 py-5 overflow-hidden"
         style={{ boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.08)' }}
       >
         <div className="h-full w-full overflow-y-scroll">

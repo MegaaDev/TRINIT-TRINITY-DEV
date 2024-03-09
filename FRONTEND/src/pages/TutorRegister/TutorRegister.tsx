@@ -1,17 +1,28 @@
-import React, { useState } from 'react';
-import { Select } from '@mantine/core';
+import React, { useContext, useState } from 'react';
+import { Select, TagsInput, Textarea } from '@mantine/core';
 import { NumberInput } from '@mantine/core';
+import { UserContext } from '../../Context/UserContextProvider';
+
 import toast from 'react-hot-toast';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const TutorRegister: React.FC = () => {
+  const [userId, setUserId] = useState('');
   const [formData, setFormData] = useState({
     username: '',
-    password: '',
+    role: 'TUTOR',
     email: '',
+    password: '',
   });
   const [formDataUpdate, setFormDataUpdate] = useState({
-    Experience: '',
-    Languages: [],
+    Experience: 0,
+    Languages: [''],
+    bio: '',
   });
+
+  const navigate = useNavigate();
+
+  const { user, setUser } = useContext(UserContext);
 
   const [status, setStatus] = useState(false);
 
@@ -19,9 +30,8 @@ const TutorRegister: React.FC = () => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
-  const handleInputChangeUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  const handleInputChangeUpdate = (value) => {
+    setFormData((prevData) => ({ ...prevData, ['Experience']: value }));
   };
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -35,6 +45,21 @@ const TutorRegister: React.FC = () => {
     }));
   };
   const handleSubmit = (e: React.FormEvent) => {
+    axios
+      .post('http://localhost:3000/api/users/register', formData)
+      .then((response) => {
+        // Handle the response here
+        console.log('Registration successful:', response.data);
+        setUserId(response.data.user._id);
+        toast.success('User created, please fill in the next form');
+        // Redirect to the next page
+        // window.location.href = '/next-page';
+      })
+      .catch((error) => {
+        // Handle the error here
+        console.error('Registration failed:', error);
+        toast.error('Registration failed');
+      });
     e.preventDefault();
     // Implement your registration logic here
     setStatus(true);
@@ -43,6 +68,24 @@ const TutorRegister: React.FC = () => {
 
   const handleSubmitUpdate = (e: React.FormEvent) => {
     e.preventDefault();
+    axios
+      .patch(`http://localhost:3000/api/users/tutor/${userId}`, formDataUpdate)
+      .then((response) => {
+        // Handle the response here
+        const user = response.data.tutor;
+        setUser(user);
+        localStorage.setItem('user', JSON.stringify(user));
+        console.log('Registration successful:', response.data);
+        toast.success('Registration successful');
+        // Redirect to the next page
+        navigate('/myschedule');
+        // window.location.href = ';
+      })
+      .catch((error) => {
+        // Handle the error here
+        console.error('Registration failed:', error);
+        toast.error('Registration failed');
+      });
     // Implement your registration logic here
     setStatus(true);
     console.log('Form Data:', formDataUpdate);
@@ -137,7 +180,7 @@ const TutorRegister: React.FC = () => {
               type="submit"
               className="bg-blue-500 text-white py-2 px-4 rounded-md"
             >
-              Register
+              Next
             </button>
           </form>
         </div>
@@ -150,26 +193,48 @@ const TutorRegister: React.FC = () => {
                 label="Teaching Experience"
                 description="in years"
                 placeholder="0"
-                onChange={handleInputChangeUpdate}
+                onChange={(value) => {
+                  console.log(value);
+                  setFormDataUpdate((prevData) => ({
+                    ...prevData,
+                    Experience: Number(value),
+                  }));
+                }}
               />
             </div>
             <div className="mb-4">
-              <Select
+              <TagsInput
                 label="Languages Known"
-                placeholder="Pick value"
+                placeholder="Select languages"
                 data={languages}
-                searchable
+                maxDropdownHeight={200}
+                onChange={(selectedOptions) => {
+                  console.log(selectedOptions);
+                  setFormDataUpdate((prevData) => ({
+                    ...prevData,
+                    Languages: selectedOptions,
+                  }));
+                }}
+              />{' '}
+              <br />
+              <Textarea
+                label="Bio"
+                // description="Input description"
+                placeholder="Your bio"
                 onChange={(e) => {
-                  console.log(e.target.value);
+                  setFormDataUpdate((prevData) => ({
+                    ...prevData,
+                    bio: e.currentTarget.value,
+                  }));
                 }}
               />
             </div>
             <button
               type="submit"
               className="bg-blue-500 text-white py-2 px-4 rounded-md"
-              onClick={() => {
-                window.location.href = '/myschedule';
-              }}
+              // onClick={() => {
+              //   window.location.href = '/myschedule';
+              // }}
             >
               Register
             </button>

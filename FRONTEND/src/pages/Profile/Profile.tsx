@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import { Card, Image, Text, Badge } from '@mantine/core';
 import EmailEditor from '../../components/Emaileditor/Emaileditor';
 
@@ -9,12 +9,12 @@ const Profile = ({ bio, name }) => {
     const [email, setEmail] = useState("pawan324005@gmail.com");
 
     // Function to update the rating
-    const updateRating = (newRating) => {
+    const updateRating = (newRating: SetStateAction<number>) => {
         setRating(newRating);
     };
 
     // Function to handle changes in the email input field
-    const handleEmailChange = (event) => {
+    const handleEmailChange = (event: { target: { value: SetStateAction<string>; }; }) => {
         setEmail(event.target.value);
     };
 

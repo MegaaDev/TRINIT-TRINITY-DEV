@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import connectDatabase from './utils/connectDatabase';
 import userRouter from './routes/userRouter';
+import tutorRuter from './routes/tutorRoutes';
 import { errorHandler, notFoundErr } from './middleware/errorHandler';
 import { protect, restricTo } from './controllers/userController';
 import cookieParser from 'cookie-parser';
@@ -32,6 +33,7 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 // app.use("/api/payments", accountantRouter);
 // app.use("/api/report", reportRouter);
 app.use('/api/users', userRouter);
+app.use('/api/users/tutor', tutorRuter);
 
 app.use('/test', protect, restricTo('ADMIN'), (req, res) => {
   res.status(200).json({
