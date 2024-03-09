@@ -1,4 +1,5 @@
 import './App.css';
+import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Courses from './components/Courses/Courses';
@@ -13,6 +14,8 @@ import TutorRegister from './pages/TutorRegister/TutorRegister';
 import LearnerRegister from './pages/LearnerRegister/LearnerRegister';
 import { ProfileProvider } from './pages/Profile/ProfileContext';
 import Profile from './pages/Profile/Profile';
+import CallRoom from './pages/CallRoom/CallRoom';
+import CourseHome from './pages/CourseHome/CourseHome';
 
 function App() {
   return (
@@ -28,6 +31,7 @@ function App() {
             <Route path="myschedule" element={<Schedule />} />
             <Route path="mycourses" element={<Courses />} />
             <Route path="mycourses/:id" element={<ManageCourse />} />
+            <Route path="mycourses/desc/:id" element={<CourseHome />} />
             <Route path="courses" element={<BrowseCourse />} />
             <Route path="myprofile" element={<Profile bio={"hello Pawan"} name={"Pawan Kumar"}/>} />
           </Route>
