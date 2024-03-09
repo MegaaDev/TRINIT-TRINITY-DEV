@@ -65,7 +65,6 @@ const getTutorById = expressAsyncHandler(async (req, res) => {
 
 const updateTutor = expressAsyncHandler(async (req: any, res) => {
   console.log(req.params.id, 'id');
-  // const tutor = await Tutor.findOne({ user: req.params.id });
   const tutor = await Tutor.findOne({ user: req.params.id }).populate('user');
   const { languages, bio, experience } = req.body;
   if (!tutor) {

@@ -1,7 +1,7 @@
 import Calender from './../../components/Calender/Calender';
 import Edit from './../../../public/edit.png';
 import Done from './../../../public/done.png';
-import { Button, Text } from '@mantine/core';
+import { Button, Modal, Text } from '@mantine/core';
 import { modals } from '@mantine/modals';
 
 import { UserContext } from '../../Context/UserContextProvider';
@@ -14,6 +14,8 @@ import {
   MonthPickerInput,
   DatePickerInput,
 } from '@mantine/dates';
+import { useDisclosure } from '@mantine/hooks';
+import axios from 'axios';
 
 const CreateCourse = () => {
   const [languages] = useState([
@@ -34,13 +36,11 @@ const CreateCourse = () => {
 
   console.log(user);
   const [description, setDescription] = useState('');
-  const [level, setLevel] = useState([
-    'Beginner',
-    'Intermediate',
-    'Advanced',
-    'Exam Level',
-  ]);
+  const [level, setLevel] = useState(['Beginner', 'Intermediate', 'Advanced']);
+  const [levelsResult, setLevelResult] = useState('');
   const [mode, setMode] = useState('idle');
+  const [courseName, setCourseName] = useState('');
+  const [opened, { open, close }] = useDisclosure(false);
   const Slots = () => {
     return (
       <div className="w-full">
@@ -71,6 +71,33 @@ const CreateCourse = () => {
   const [pricing, setPricing] = useState(0);
   const [totalPricing, setTotalPricing] = useState(0);
   const [weeklyClasses, setWeeklyClasses] = useState(0);
+  const [resultLanguage, setResultLanguage] = useState('');
+  const [certified, setCertified] = useState('');
+
+  const createCourseResult = () => {
+    const courseData = {
+      name: courseName,
+      description: description,
+      language: resultLanguage,
+      level: levelsResult, //array
+      certified: certified,
+      pricing: pricing,
+      weeklyClasses: weeklyClasses,
+      startDate: startDate,
+      endDate: endDate,
+      courseDuration: courseDuration,
+      tutorId: user.id,
+    };
+
+    axios
+      .post('/api/createCourse', courseData)
+      .then((response) => {
+        // handle the response here
+      })
+      .catch((error) => {
+        // handle the error here
+      });
+  };
 
   const handlePricingChange = (value) => {
     const price = parseInt(value);
@@ -93,8 +120,30 @@ const CreateCourse = () => {
       setEndDate(endDate);
     }
   }, [startDate, courseDuration]);
+
   return (
     <div className="h-full w-full p-10 flex flex-col gap-5 ">
+      <Modal opened={opened} onClose={close} title="Confirmation" centered>
+        <div>
+          <div>Are you sure you want to create this course ?</div>
+          <div className="flex mt-3 px-2 text-white justify-between items-center">
+            <div>
+              <button
+                onClick={() => {
+                  close();
+                  createCourseResult();
+                }}
+                className="bg-customBlue py-1 px-4 rounded-md hover:bg-[#6a7ed6]  transition-all"
+              >
+                YES
+              </button>
+            </div>
+            <div className="bg-[#e13f33] py-1 px-4 rounded-md hover:bg-[#fb5d52] active:bg-[#bb4138] transition-all">
+              <button onClick={close}>NO</button>
+            </div>
+          </div>
+        </div>
+      </Modal>
       <div className="w-full h-[50%] flex flex-row justify-between ">
         <div
           className=" w-[48%] h-full flex flex-col text-3xl gap-2 font-medium p-6"
@@ -104,6 +153,7 @@ const CreateCourse = () => {
             type="text"
             className="border-b-[2px] py-2 font-merium  border-gray-300 outline-0"
             placeholder="Enter Course Name"
+            onChange={(e) => setCourseName(e.target.value)}
           />
           <div className="w-full flex mt-3 justify-between gap-5">
             {' '}
@@ -111,15 +161,19 @@ const CreateCourse = () => {
             <textarea
               className="text-[#2e2e2e] rounded-lg w-full border-[3px] font-medium text-lg h-[80px]"
               defaultValue={description}
-              // onChange={(e) => {
-              //   props.setDescription(e.target.value);
-              // }}
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
             />
           </div>
           <Select
             label="Language"
             placeholder="Pick Language"
             data={languages}
+            onChange={(e) => {
+              console.log(e);
+              setResultLanguage(e);
+            }}
             styles={{
               label: {
                 color: '#7272f1',
@@ -128,25 +182,18 @@ const CreateCourse = () => {
             }}
             searchable
           />
-          <TagsInput
-            label="Level tags"
-            placeholder="Select Level tags"
+          <Select
+            label="Level"
+            placeholder="Select Level"
             data={level}
-            maxDropdownHeight={200}
             styles={{
               label: {
                 color: '#7272f1',
                 fontWeight: 'bold', // Change this to your desired color
               },
             }}
-            // onChange={(selectedOptions) => {
-            //   console.log(selectedOptions);
-            //   setFormDataUpdate((prevData) => ({
-            //     ...prevData,
-            //     Languages: selectedOptions,
-            //   }));
-            // }}
-          />{' '}
+            onChange={(value) => setLevelResult(String(value))}
+          />
         </div>
         <div
           className="w-[50%] flex flex-row justify-center rounded-lg  overflow-y-scroll"
@@ -250,7 +297,12 @@ const CreateCourse = () => {
                 {' '}
                 Is it Certified?
               </p>{' '}
-              <Switch size="lg" onLabel="YES" offLabel="NO" />
+              <Switch
+                size="lg"
+                onLabel="YES"
+                offLabel="NO"
+                onChange={(value) => setCertified(String(value))}
+              />
             </div>
           </div>
           <div
@@ -260,6 +312,10 @@ const CreateCourse = () => {
             <div>
               <div
                 style={{ boxShadow: '0px 10px 30px rgba(100, 100, 250, 0.5)' }}
+                onClick={() => {
+                  open();
+                  console.log('helo');
+                }}
                 className="h-[50px] w-[200px] rounded-[5px] flex flex-row justify-center items-center text-white font-semibold cursor-pointer transition-all bg-customBlue hover:bg-[#7a89e0]"
               >
                 Create Course

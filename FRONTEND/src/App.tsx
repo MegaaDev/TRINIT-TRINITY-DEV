@@ -31,6 +31,7 @@ function App() {
           <Route path="/" element={<Navbar />}>
             <Route index element={<Schedule />} />
             <Route path="myschedule" element={<Schedule />} />
+            <Route path="createcourse" element={<CreateCourse />} />
             <Route path="mycourses" element={<Courses />} />
             <Route path="mycourses/:id" element={<ManageCourse />} />
             <Route path="mycourses/desc/:id" element={<CourseHome />} />
