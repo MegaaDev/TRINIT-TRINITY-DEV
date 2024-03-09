@@ -38,7 +38,7 @@ const AttemptTest = () => {
                     style={{ position: "absolute", top: "24%", left: "38%" }}
                 >
                     <Card.Section>
-                        <Text style={{ fontSize: "2rem", fontWeight: "700", textAlign: "center", padding: "2%", marginBottom: "2.5%" }}>
+                        <Text style={{ fontSize: "2rem", fontWeight: "700", textAlign: "center", padding: "3.2%", marginBottom: "2.2%" }}>
                             WHAT KIND OF SERVICES YOU ARE QUIZ ?
                         </Text>
                         <Text className="text-[168x] h-[40px] flex justify-center items-center text-white p-2 bg-[#3188E7] hover:bg-[#43a0fc] active:bg-[#3178bb] transition-all rounded-xl " style={{ fontSize: "1r8m", fontWeight: "700", textAlign: "center", padding: "2%", width: "30%", borderRadius: "2.5rem", position: "absolute", left: "35%" }}>

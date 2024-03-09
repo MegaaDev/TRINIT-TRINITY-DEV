@@ -123,6 +123,19 @@ export const Navbar = () => {
                 >
                   Browse Courses
                 </div>
+                <div
+                  className={`h-[40px] w-full flex items-center cursor-pointer font-medium ${current == 'Manage Courses'
+                    ? 'text-[#7272f1]'
+                    : 'text-[#838383]'
+                    }`}
+                  onClick={(e) => {
+                    window.location.href = '/myresources';
+                    const target = e.target as HTMLElement;
+                    setCurrent(`${target.innerHTML}`);
+                  }}
+                >
+                  Resources Hub
+                </div>
               </div>
               <div className="w-full h-fit  flex flex-col gap-5">
                 <div className="h-[40px] w-full flex items-center cursor-pointer   text-[#838383] font-medium">
@@ -191,19 +204,6 @@ export const Navbar = () => {
                   }}
                 >
                   Manage Courses
-                </div>
-                <div
-                  className={`h-[40px] w-full flex items-center cursor-pointer font-medium ${current == 'Manage Courses'
-                    ? 'text-[#7272f1]'
-                    : 'text-[#838383]'
-                    }`}
-                  onClick={(e) => {
-                    window.location.href = '/myresources';
-                    const target = e.target as HTMLElement;
-                    setCurrent(`${target.innerHTML}`);
-                  }}
-                >
-                  Resources Hub
                 </div>
               </div>
               <div className="w-full h-fit  flex flex-col gap-5">

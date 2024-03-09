@@ -23,6 +23,8 @@ import ViewFlashCard from './pages/FlashCards/ViewFlashCard';
 import AttemptTest from './pages/Quiz/AttemptQuiz';
 import CreateTest from './pages/Quiz/CreateQuiz';
 import Resources from './pages/Resources/ResourceHub';
+import QuizViewer from './pages/Quiz/QuizViewer';
+import FlashCardHolder from './pages/FlashCards/FlashCardHolder';
 
 function App() {
   return (
@@ -47,6 +49,8 @@ function App() {
             <Route path="/attemptQuiz" element={<AttemptTest />} />
             <Route path="/createTest" element={<CreateTest />} />
             <Route path="/myresources" element={<Resources />} />
+            <Route path="/viewQuiz" element={<QuizViewer />} />
+            <Route path="/displayFlashCards" element={<FlashCardHolder />} />
             <Route
               path="myprofile"
               element={<Profile bio={'hello Pawan'} name={'Pawan Kumar'} />}

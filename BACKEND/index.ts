@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import express from 'express';
-import dotenv from 'dotenv';
-import connectDatabase from './utils/connectDatabase';
-import userRouter from './routes/userRouter';
-import tutorRuter from './routes/tutorRoutes';
-import studentRouter from './routes/studentRoutes';
-import courseRouter from './routes/coursesRouter';
-import { errorHandler, notFoundErr } from './middleware/errorHandler';
-import { protect, restricTo } from './controllers/userController';
-import cookieParser from 'cookie-parser';
-import cors from 'cors';
-import path from 'path';
-=======
 import express from "express";
 import dotenv from "dotenv";
 import connectDatabase from "./utils/connectDatabase";
@@ -23,7 +9,6 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import path from "path";
 import basicStripeInit from "./utils/stripeBasicInit";
->>>>>>> 9cc45d0 (feat(backend): stripe integration (hopefully works :( ))
 dotenv.config();
 
 connectDatabase("TriNit");
@@ -49,15 +34,8 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 // app.use("/api/vouchers", voucherRouter);
 // app.use("/api/payments", accountantRouter);
 // app.use("/api/report", reportRouter);
-<<<<<<< HEAD
-app.use('/api/users', userRouter);
-app.use('/api/users/tutor', tutorRuter);
-app.use('/api/courses', courseRouter);
-app.use('/api/student', studentRouter);
-=======
 app.use("/api/users", userRouter);
 app.use("/api/users/tutor", tutorRuter);
->>>>>>> 9cc45d0 (feat(backend): stripe integration (hopefully works :( ))
 
 app.use("/test", protect, restricTo("ADMIN"), (req, res) => {
   res.status(200).json({

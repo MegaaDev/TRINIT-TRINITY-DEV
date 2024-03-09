@@ -7,11 +7,11 @@ const Resources = () => {
     const navigate = useNavigate()
 
     const handleQuiz=()=>{
-        navigate('/attemptQuiz');
+        navigate('/viewQuiz');
     }
 
     const handleFlashCard=()=>{
-        navigate('/viewFlash');
+        navigate('/displayFlashCards');
     }
 
     return (
@@ -38,7 +38,7 @@ const Resources = () => {
                         </div>
                     </div>
                     <button onClick={handleQuiz} className="mt-[25px] text-[16px] h-[40px] flex justify-center items-center text-white p-3 bg-[#318CE7] hover:bg-[#43a0fc] active:bg-[#3176bb] transition-all rounded-md " style={{ position: "absolute", top: "80%" }}>
-                        Attempt Quiz
+                        Quiz
                     </button>
                 </Card>
 
