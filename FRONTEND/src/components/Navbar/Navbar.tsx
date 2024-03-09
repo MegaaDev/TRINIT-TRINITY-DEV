@@ -5,13 +5,13 @@ import { UserContext } from '../../Context/UserContextProvider';
 export const Navbar = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
-  console.log(user);
-  // useEffect(() => {
-  //   if (!user || user.role !== 'ADMIN') {
-  //     navigate('/landing');
-  //     return;
-  //   }
-  // }, []);
+  useEffect(() => {
+    console.log(user);
+    if (!user || user.role !== 'ADMIN') {
+      navigate('/landing');
+      return;
+    }
+  }, []);
 
   const UserAvatar = () => {
     if (user?.user?.username == undefined) return <></>;
