@@ -1,14 +1,17 @@
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
+import { UserContext } from '../../Context/UserContextProvider';
+import { useContext } from 'react';
+import axios from 'axios';
 type Dday = {
   day: string;
   active: string;
   setActive: (active: string) => void;
 };
-const days = ['MON', 'TUE', 'WED', 'THURS', 'FRI', 'SAT', 'SUN'];
+const days = ['SUN', 'MON', 'TUE', 'WED', 'THURS', 'FRI', 'SAT'];
 const currentDate = new Date();
-const currentDay = days[currentDate.getDay() - 1];
+const currentDay = days[currentDate.getDay()] || '';
 const Day = (props: Dday) => {
+  const [selectedDay, setSelectedDay] = useState('');
   return (
     <div>
       {' '}
@@ -61,7 +64,43 @@ const Slots = () => {
 };
 
 const Schedule = () => {
+  const { user } = useContext(UserContext);
+  const storedUser = localStorage.getItem('user');
+  const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+  const currentUser = parsedUser || user;
+  // console.log(currentUser);
+  const [array, setArray] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/api/courses/${currentUser.user._id}`)
+      .then((response) => {
+        // Handle the response data here
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        console.error(error);
+      });
+  }, []);
   const [active, setActive] = useState(currentDay);
+  const dayMap: { [key: string]: number } = {
+    SUN: 0,
+    MON: 1,
+    TUE: 2,
+    WED: 3,
+    THURS: 4,
+    FRI: 5,
+    SAT: 6,
+  };
+  const decodeMap: { [key: string]: string } = {
+    SUN: 'SUNDAY',
+    MON: 'MONDAY',
+    TUE: 'TUESDAY',
+    WED: 'WEDNESDAY',
+    THURS: 'THURSDAY',
+    FRI: 'FRIDAY',
+    SAT: 'SATURDAY',
+  };
   return (
     <div className="h-full max-h-[100%] w-full p-10 overflow-hidden">
       <div className="h-[100%] w-full flex flex-col gap-10 ">
@@ -91,7 +130,9 @@ const Schedule = () => {
           style={{ boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.08)' }}
         >
           <div className="h-full w-full flex flex-col py-10 ">
-            <p className="font-bold text-2xl text-[#5a5a5a] mb-8">Saturday</p>
+            <p className="font-bold text-2xl text-[#5a5a5a] mb-8">
+              {decodeMap[active]}
+            </p>
             <div className="w-full overflow-y-scroll">
               {' '}
               <Slots />

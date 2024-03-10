@@ -6,6 +6,7 @@ import {
   createTutor,
   updateTutor,
   isTutor,
+  getSchedule,
 } from '../controllers/tutorController';
 import { protect, restricTo } from '../controllers/userController';
 
@@ -15,6 +16,7 @@ router.get('/', getAllTutors);
 router.get('/:id', getTutorById);
 router.get('/language/:language', getTutorByLanguage);
 router.post('/', protect, restricTo('TUTOR'), createTutor);
+router.get('/schedule/:id', getSchedule);
 router.patch(
   '/:id',
   // protect, restricTo('TUTOR'), isTutor,

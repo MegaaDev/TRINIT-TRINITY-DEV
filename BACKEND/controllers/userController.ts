@@ -93,6 +93,7 @@ const logout = expressAsyncHandler(async (req, res) => {
 });
 
 const protect = expressAsyncHandler(async (req: any, res, next) => {
+  console.log('jl');
   let token;
   if (
     req.headers.authorization &&

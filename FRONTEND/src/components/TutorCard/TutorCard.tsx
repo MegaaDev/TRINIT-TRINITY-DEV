@@ -1,9 +1,39 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { Card, Image, Text, Badge } from '@mantine/core';
+import { UserContext } from '../../Context/UserContextProvider';
 
 interface CourseCardProps {}
 
-const TutorCard: FC<CourseCardProps> = ({}) => {
+const TutorCard: FC<CourseCardProps> = ({ course }) => {
+  console.log(course, 'course');
+  const { user } = useContext(UserContext);
+  const storedUser = localStorage.getItem('user');
+  const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+  const currentUser = parsedUser || user;
+  console.log(currentUser);
+  const daysWithSlots = [];
+  Object.keys(course.slots).forEach((day) => {
+    if (course.slots[day].length > 0) {
+      daysWithSlots.push(day);
+    }
+  });
+  console.log(daysWithSlots);
+  const allSlots = [];
+  Object.values(course.slots).forEach((daySlots) => {
+    if (!allSlots.includes(daySlots)) allSlots.push(...daySlots);
+  });
+  const uniqueSlots = [...new Set(allSlots)];
+  console.log(uniqueSlots);
+  // course.slots.map((slot) => {
+  //   console.log(slot);
+  // });
+  // const daysWithSlots = [];
+  // course.slots.forEach((slot) => {
+  //   console.log(slot, 'helo');
+  //   if (slot.day.length > 0) {
+  //     daysWithSlots.push(slot.day);
+  //   }
+  // });
   return (
     <Card
       shadow="sm"
@@ -12,49 +42,56 @@ const TutorCard: FC<CourseCardProps> = ({}) => {
       className="w-[400px] h-fit cursor-pointer transition-all"
       withBorder
     >
-      <Card.Section>
-        <Image
-          src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"
-          height={80}
-          alt="Norway"
-        />
-      </Card.Section>
-      <div className="flex flex-col mt-4 mb-4">
-        <div className="mb-2">
-          <p className="font-semibold text-xl">German Crash Course</p>
+      <div className="h-[500px] flex flex-col justify-between">
+        <Card.Section>
+          <Image
+            src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"
+            height={80}
+            alt="Norway"
+          />
+        </Card.Section>
+        <div className="flex flex-col mt-2 mb-2">
+          <div className="mb-2 w-full flex flex-row justify-between">
+            <p className="font-semibold text-xl">{course.name}</p>
+            <p className="font-semibold text-lg text-[#707070]">
+              {course.creatorID.username}
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <Badge color="pink">{course.language}</Badge>
+            <Badge color="blue">{course.difficulty}</Badge>
+          </div>
+        </div>{' '}
+        <div className="flex flex-col mt-2 mb-2">
+          <div className="mb-2">
+            <Text fw={500}>Day Slots</Text>
+          </div>
+          <div className="flex gap-2">
+            {daysWithSlots.map((day) => {
+              return <Badge color="gray">{day}</Badge>;
+            })}
+          </div>
         </div>
-        <div className="flex gap-2">
-          <Badge color="pink">Greek</Badge>
-          <Badge color="blue">Intermediate</Badge>
+        <div className="flex flex-col mt-2 mb-2">
+          <div className="mb-2">
+            <Text fw={500}>Time Slots</Text>
+          </div>
+          <div className="flex gap-2">
+            {uniqueSlots.map((day) => {
+              return <Badge color="teal">{`${day[0]} - ${day[1]}`}</Badge>;
+            })}
+          </div>
         </div>
-      </div>{' '}
-      <div className="flex flex-col mt-4 mb-4">
-        <div className="mb-2">
-          <Text fw={500}>Day Slots</Text>
-        </div>
-        <div className="flex gap-2">
-          <Badge color="gray">Monday</Badge>
-          <Badge color="gray">Sunday</Badge>
-        </div>
+        <button
+          className="mt-[25px] text-[16px] h-[40px] flex justify-center items-center text-white p-3 bg-[#318CE7] hover:bg-[#43a0fc] active:bg-[#3176bb] transition-all rounded-md "
+          onClick={(e) => {
+            console.log(e, 'clicked');
+            window.location.href = `/mycourses/${course._id}`;
+          }}
+        >
+          Manage
+        </button>
       </div>
-      <div className="flex flex-col mt-4 mb-4">
-        <div className="mb-2">
-          <Text fw={500}>Time Slots</Text>
-        </div>
-        <div className="flex gap-2 flex-wrap">
-          <Badge color="teal">3:00PM - 4:00PM</Badge>
-          <Badge color="teal">3:00PM - 4:00PM</Badge>
-          <Badge color="teal">5:00PM - 5:00PM</Badge>
-        </div>
-      </div>
-      <button
-        className="mt-[25px] text-[16px] h-[40px] flex justify-center items-center text-white p-3 bg-[#318CE7] hover:bg-[#43a0fc] active:bg-[#3176bb] transition-all rounded-md "
-        onClick={() => {
-          window.location.href = '/mycourses/1';
-        }}
-      >
-        Manage
-      </button>
     </Card>
   );
 };

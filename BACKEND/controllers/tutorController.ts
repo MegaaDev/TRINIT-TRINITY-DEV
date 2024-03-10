@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Tutor from '../models/tutorModel';
-import { Types } from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 import User from '../models/userModel';
 
 const isTutor = expressAsyncHandler(
@@ -38,6 +38,21 @@ const getAllTutors = expressAsyncHandler(async (req, res) => {
   res.status(200).json({
     status: 'success',
     tutors,
+  });
+});
+
+const getSchedule = expressAsyncHandler(async (req: any, res) => {
+  const tutor = await Tutor.findById(req.params.id).populate('user');
+  if (!tutor) {
+    res.status(404).json({
+      status: 'fail',
+      message: 'Tutor not found',
+    });
+    return;
+  }
+  res.status(200).json({
+    status: 'success',
+    schedule: tutor,
   });
 });
 
@@ -109,6 +124,6 @@ export {
   getTutorByLanguage,
   getTutorById,
   updateTutor,
-  //   updateTutorPlan,
+  getSchedule,
   isTutor,
 };

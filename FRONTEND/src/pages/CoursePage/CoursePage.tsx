@@ -124,7 +124,10 @@ const CoursePage: FC<CoursePageProps> = ({}) => {
               (total, day) =>
                 total + selectedSlots[day as keyof typeof selectedSlots].length,
               0
-            ) * 20}{' '}
+            ) *
+              course.price *
+              4 *
+              parseInt(course.duration)}{' '}
             ?
           </div>
           <div className="flex mt-3 px-2 text-white justify-between items-center">
@@ -256,7 +259,7 @@ const CoursePage: FC<CoursePageProps> = ({}) => {
             <div>Level : {course.difficulty}</div>
             <div>Pricing per slot : ${course.price}</div>
             <div>Course Start Date : March 11, 2024</div>
-            <div>Course Duration : {course.duation} Months</div>
+            <div>Course Duration : {course.duration} Months</div>
           </div>
         </div>
 
@@ -267,7 +270,10 @@ const CoursePage: FC<CoursePageProps> = ({}) => {
               (total, day) =>
                 total + selectedSlots[day as keyof typeof selectedSlots].length,
               0
-            ) * 20}
+            ) *
+              course.price *
+              4 *
+              course.duration}
           </div>
           <div>
             <button

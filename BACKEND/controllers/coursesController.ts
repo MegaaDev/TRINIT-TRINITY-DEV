@@ -13,7 +13,16 @@ import stripe from "../utils/stripe";
 
 const getAllTutorCourses = expressAsyncHandler(async (req: any, res) => {
   const tutorID = req.params.id;
-  const courses = await Courses.find({ creatorID: tutorID });
+  // console.log(tutorID);
+
+  const courses = await Courses.find({
+    creatorID: new mongoose.Types.ObjectId(tutorID),
+  }).populate('creatorID');
+
+  console.log(courses);
+
+  // const bookedSlotsArray = courses.flatMap((course) => course.bookedSlots);
+  // console.log(bookedSlotsArray);
   if (courses.length == 0) {
     res.status(404).json({
       status: 'failure',

@@ -23,7 +23,7 @@ router.get(
   getCourseById
 );
 router.get(
-  '/tutorCourses/:id',
+  '/all/:id',
   // protect,
   // restricTo('STUDENT'),
   getAllTutorCourses

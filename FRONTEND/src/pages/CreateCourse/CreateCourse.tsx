@@ -17,6 +17,7 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const CreateCourse = () => {
   const [calenderSchedule, setCalenderSchedule] = useState<{
@@ -92,6 +93,7 @@ const CreateCourse = () => {
   const [weeklyClasses, setWeeklyClasses] = useState(0);
   const [resultLanguage, setResultLanguage] = useState('');
   const [certified, setCertified] = useState('');
+  const navigate = useNavigate();
 
   const createCourseResult = () => {
     const courseData = {
@@ -117,6 +119,7 @@ const CreateCourse = () => {
         // handle the response here
         toast.success('Course Created Successfully!');
         console.log(response.data);
+        navigate('/mycourses');
       })
       .catch((error) => {
         // handle the error here

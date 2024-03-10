@@ -2,15 +2,54 @@ import Calender from '../Calender/Calender';
 import Edit from './../../../public/edit.png';
 import Done from './../../../public/done.png';
 import { UserContext } from '../../Context/UserContextProvider';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
+import { URLSearchParams } from 'url';
+import { useParams } from 'react-router-dom';
 
 const Courses = () => {
-  const { user, setUser } = useContext(UserContext);
+  const [calenderSchedule, setCalenderSchedule] = useState<{
+    Monday: [string][];
+    Tuesday: [string][];
+    Wednesday: [string][];
+    Thursday: [string][];
+    Friday: [string][];
+    Saturday: [string][];
+    Sunday: [string][];
+  }>({
+    Monday: [],
+    Tuesday: [],
+    Wednesday: [],
+    Thursday: [],
+    Friday: [],
+    Saturday: [],
+    Sunday: [],
+  });
+  const { id } = useParams();
+  console.log(id);
+  const [course, setCourse] = useState([]);
+  const [description, setDescription] = useState('');
 
-  console.log(user);
-  const [description, setDescription] = useState(
-    "Learn German in this intensive crash course  to help you quickly grasp the fundamentals of the language. Whether you're a beginner or have some prior knowledge, this course will cover essential vocabulary,grammar, and conversational skills"
-  );
+  // const { user } = useContext(UserContext);
+  // const storedUser = localStorage.getItem('user');
+  // const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+  // const currentUser = parsedUser || user;
+  // console.log(currentUser);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/api/courses/${id}`)
+      .then((response) => {
+        // Handle the response data here
+        console.log(response.data);
+        setCourse(response.data.course);
+        setDescription(response.data.course.description);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        console.error(error);
+      });
+  }, []);
+  // console.log(user);
   const DefaultDesc = (props) => {
     if (mode == 'Edit') {
       return (
@@ -81,7 +120,7 @@ const Courses = () => {
           className=" w-[48%] h-full flex flex-col text-3xl gap-5 font-semibold p-6"
           style={{ boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.08)' }}
         >
-          <p>German Crash Course</p>
+          <p>{course.name}</p>
           <div className="w-[200px] h-[50px] rounded-md cursor-pointer bg-customBlue font-semibold flex justify-center items-center text-white text-lg">
             Start Live Session
           </div>
@@ -92,7 +131,10 @@ const Courses = () => {
           className="w-[50%] flex flex-row justify-center rounded-lg  overflow-y-scroll"
           style={{ boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.08)' }}
         >
-          <Calender />
+          <Calender
+            calenderSchedule={calenderSchedule}
+            setCalenderSchedule={setCalenderSchedule}
+          />
         </div>
       </div>
       <div

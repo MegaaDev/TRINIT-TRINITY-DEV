@@ -11,13 +11,13 @@ export const Navbar = () => {
 
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
-  useEffect(() => {
-    console.log(user);
-    // if (!localStorage.getItem('user')) {
-    //   navigate('/landing');
-    //   return;
-    // }
-  }, [user]);
+  // useEffect(() => {
+  //   console.log(user);
+  //   if (!localStorage.getItem('user')) {
+  //     navigate('/landing');
+  //     return;
+  //   }
+  // }, [user]);
 
   const UserAvatar = () => {
     if (user?.user?.username == undefined) return <></>;
