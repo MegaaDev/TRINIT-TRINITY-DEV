@@ -20,6 +20,9 @@ const LearnerRegister: React.FC = () => {
 
   const { setUser } = useContext(UserContext);
 
+
+
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Implement your registration logic here
@@ -34,7 +37,7 @@ const LearnerRegister: React.FC = () => {
         setUser(res.data.user);
         localStorage.setItem('user', JSON.stringify(res.data.user));
         toast.success('Registration successful!');
-        navigate('/mycourses');
+        navigate('/boughtCourses');
       })
       .catch((err) => {
         toast.error('Something went Wrong');

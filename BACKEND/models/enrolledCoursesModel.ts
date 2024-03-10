@@ -5,7 +5,7 @@ const userEnrolledCoursesSchema = new mongoose.Schema({
   user: { type: ObjectId, required: true, ref: 'User' },
   enrolledCoursesArray: [
     {
-      courseID: { type: ObjectId, ref: 'Courses' },
+      courseID: { type: mongoose.Types.ObjectId, ref: 'Courses' },
       courseBookedSlot: {
         Monday: [Number],
         Tuesday: [Number],
@@ -22,6 +22,6 @@ const userEnrolledCoursesSchema = new mongoose.Schema({
 const EnrolledCourses = mongoose.model(
   'EnrolledCourses',
   userEnrolledCoursesSchema
-);
+);  
 
 export default EnrolledCourses;

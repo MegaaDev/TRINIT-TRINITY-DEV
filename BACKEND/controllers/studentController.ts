@@ -9,7 +9,7 @@ const registerCourse = expressAsyncHandler(async (req: any, res) => {
   const { course, timeSlots, tutorId } = req.body;
   const student = await Student.findOne({ user: req.user._id });
   const selectedCourse = await Courses.findById(course);
-  const enrolledCourse = await EnrolledCourses.findOne({ user: req.user_id });
+  const enrolledCourse = await EnrolledCourses.findOne({ user: req.user._id });
   console.log('Id    ', tutorId);
   const tutor = await Tutor.findOne({
     user: tutorId,
@@ -118,4 +118,21 @@ const registerCourse = expressAsyncHandler(async (req: any, res) => {
   });
 });
 
-export { registerCourse };
+const getMyCourses = expressAsyncHandler(async (req: any, res) => {
+  const courses = await EnrolledCourses.findOne({
+    user:req.user._id
+  }).populate({
+    path: 'enrolledCoursesArray',
+    populate: {
+      path: 'courseID',
+      model: 'Courses'
+    }
+  })
+  res.status(200).json({
+    status:"success",
+    courses
+  })
+  return
+})
+
+export { registerCourse, getMyCourses };

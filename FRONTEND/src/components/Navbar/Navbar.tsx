@@ -101,7 +101,7 @@ export const Navbar = () => {
                       : 'text-[#838383]'
                   }`}
                   onClick={(e) => {
-                    window.location.href = '/mycourses';
+                    window.location.href = '/boughtCourses';
                     const target = e.target as HTMLElement;
                     console.log(target.innerHTML);
                     setCurrent(`${target.innerHTML}`);
