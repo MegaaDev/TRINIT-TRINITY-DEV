@@ -1,15 +1,9 @@
-<<<<<<< HEAD
 import expressAsyncHandler from 'express-async-handler';
-import Courses from '../models/courseModel';
-import EnrolledCourses from '../models/enrolledCoursesModel';
 import mongoose, { ObjectId, Query } from 'mongoose';
 import Tutor from '../models/tutorModel';
-=======
-import expressAsyncHandler from "express-async-handler";
-import Courses from "../models/courseModel";
-import EnrolledCourses from "../models/enrolledCoursesModel";
-import stripe from "../utils/stripe";
->>>>>>> 9cc45d0 (feat(backend): stripe integration (hopefully works :( ))
+import Courses from '../models/courseModel';
+import EnrolledCourses from '../models/enrolledCoursesModel';
+// import stripe from '../utils/stripe';
 
 const getAllTutorCourses = expressAsyncHandler(async (req: any, res) => {
   const tutorID = req.params.id;
@@ -38,7 +32,7 @@ const getAllTutorCourses = expressAsyncHandler(async (req: any, res) => {
 
 const getCourseById = expressAsyncHandler(async (req: any, res) => {
   const courseID = req.params.id;
-  console.log(new mongoose.Schema.ObjectId(courseID));
+  console.log(new mongoose.Types.ObjectId(courseID));
   const course = await Courses.findOne({
     _id: new mongoose.Types.ObjectId(courseID),
   }).populate('creatorID');
