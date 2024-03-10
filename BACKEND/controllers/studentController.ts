@@ -49,13 +49,13 @@ const registerCourse = expressAsyncHandler(async (req: any, res) => {
   const coursePrice =
     selectedCourse.price * numberOfSlots * 4 * selectedCourse.duration;
 
-  if (student.credits < coursePrice) {
-    res.status(400).json({
-      status: 'fail',
-      message: 'You need more credits!',
-    });
-    return;
-  }
+  // if (student.credits < coursePrice) {
+  //   res.status(400).json({
+  //     status: 'fail',
+  //     message: 'You need more credits!',
+  //   });
+  //   return;
+  // }
 
   if (!selectedCourse.bookedSlots) {
     selectedCourse.bookedSlots = {
@@ -120,19 +120,19 @@ const registerCourse = expressAsyncHandler(async (req: any, res) => {
 
 const getMyCourses = expressAsyncHandler(async (req: any, res) => {
   const courses = await EnrolledCourses.findOne({
-    user:req.user._id
+    user: req.user._id,
   }).populate({
     path: 'enrolledCoursesArray',
     populate: {
       path: 'courseID',
-      model: 'Courses'
-    }
-  })
+      model: 'Courses',
+    },
+  });
   res.status(200).json({
-    status:"success",
-    courses
-  })
-  return
-})
+    status: 'success',
+    courses,
+  });
+  return;
+});
 
 export { registerCourse, getMyCourses };
