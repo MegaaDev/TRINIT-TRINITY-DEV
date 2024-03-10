@@ -1,30 +1,20 @@
-# React + TypeScript + Vite
+# LinguaConnect by Team TRINITY
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Objective
 
-Currently, two official plugins are available:
+- To design and develop an interactive online platform that connects language learners with
+  teachers for personalized online lessons by offering a platform where learners can choose a
+  tutor based on their target language, fluency, budget and schedule.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features Implemented
 
-## Expanding the ESLint configuration
+- [x] Users can register either as a tutor or as a student.
+- [x] Students can select slots that a tutor offers per their choice.
+- [x] Students can create flash cards for a particular langauge, add more flash-cards and review them wwhenever needed.
+- [x] Tutors can set up slots as per their availibility and can set their own pricing.
+- [x] A one-to-one video call feature through which classes will be conducted has been implemented through **AgoraRTC**.
+- [x] A payment-model has been implemented using **Stripe-API**
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tech-Stack
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+MERN stack.
