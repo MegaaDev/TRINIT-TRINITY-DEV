@@ -19,5 +19,26 @@
 
 MERN stack.
 
+## Setup and running the project
+
+### Frontend Setup
+
+```bash
+cd ./FRONTEND
+npm i
+npm run dev
+```
+
+
+### Backend Setup
+
+```bash
+cd ./BACKEND
+npm i
+npm run dev
+```
+
+
+
 ## Video presentation link:
 [Link](https://drive.google.com/drive/folders/1NlY_Fi6CB3UzsCJnBoyr0SCvJWUJhDkt)
