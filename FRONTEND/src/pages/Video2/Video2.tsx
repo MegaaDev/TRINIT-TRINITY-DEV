@@ -8,11 +8,11 @@ interface Video2Props {
 const Video2: FC<Video2Props> = ({ setVideoCall  }) => {
     const [role, setRole] = useState("TEACHER");
   const rtcProps : PropsInterface = {
-    appId: 'cc7bb6b0165a4ee8855a212baa58e50c',
-    channel: 'TriNit',
-    token: '007eJxTYJj4mIMzX8Noftzdbkmns/n26s2v5tV0mxx6kZQ6pfpL9gcFhuRk86QksyQDQzPTRJPUVAsLU9NEI0OjpMREU4tUU4PksvzXqQ2BjAxbndMYGKEQxGdjCCnK9MssYWAAAJb8ILM=', // use null or skip if using app in testing mode
+    appId: '27454368e21d4658821368b0cf018b86',
+    channel: 'TriNit Final',
+    token: null, // use null or skip if using app in testing mode
     role:(role==="TEACHER")?"host":"audience",
-    layout: layout.pin,
+    layout: layout.grid,
   };
   const callbacks = {
     EndCall: () => setVideoCall(false),

@@ -93,7 +93,6 @@ const logout = expressAsyncHandler(async (req, res) => {
 });
 
 const protect = expressAsyncHandler(async (req: any, res, next) => {
-  console.log('jl');
   let token;
   if (
     req.headers.authorization &&
@@ -104,6 +103,7 @@ const protect = expressAsyncHandler(async (req: any, res, next) => {
   if (req.cookies.trinity) {
     token = req.cookies.trinity;
   }
+  console.log(JSON.stringify(req.cookies));
   if (!token) {
     res.status(401).json({
       status: 'fail',

@@ -4,7 +4,7 @@ import AgoraUIKit from "agora-react-uikit";
 const Video=()=> {
     const [videoCall, setVideoCall] = useState(true);
     const rtcProps = {
-        appId: 'cc7bb6b0165a4ee8855a212baa58e50c',
+        appId: '27454368e21d4658821368b0cf018b86',
         channel: 'TriNit',
         token: '007eJxTYJj4mIMzX8Noftzdbkmns/n26s2v5tV0mxx6kZQ6pfpL9gcFhuRk86QksyQDQzPTRJPUVAsLU9NEI0OjpMREU4tUU4PksvzXqQ2BjAxbndMYGKEQxGdjCCnK9MssYWAAAJb8ILM=' // use null or skip if using app in testing mode
     };

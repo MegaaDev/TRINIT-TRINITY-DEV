@@ -3,6 +3,7 @@ import TutorCard from '../TutorCard/TutorCard';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../Context/UserContextProvider';
 import axios from 'axios';
+import TutorCard2 from '../TutorCard2/TutorCard2';
 const Courses = () => {
   const [courses, setCourses] = useState([]);
   const navigate = useNavigate();
@@ -13,7 +14,9 @@ const Courses = () => {
   // console.log(currentUser);
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/courses/all/${currentUser.user._id}`)
+      .get(`http://localhost:3000/api/courses/all/${currentUser.user._id}`, {
+        withCredentials: true,
+      })
       .then((response) => {
         // Handle the response data here
         console.log(response.data);
@@ -40,7 +43,7 @@ const Courses = () => {
       </div>
       <div className="h-[calc(100%-100px)] w-full flex flex-wrap overflow-y-scroll gap-10">
         {courses.map((course) => {
-          return <TutorCard course={course} />;
+          return <TutorCard2 course={course} />;
         })}
         {/* <TutorCard />
         <TutorCard />

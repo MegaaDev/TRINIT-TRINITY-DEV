@@ -1,6 +1,7 @@
 import React, { FC, useContext,useEffect } from 'react';
 import { Card, Image, Text, Badge } from '@mantine/core';
 import { UserContext } from '../../Context/UserContextProvider';
+import { useNavigate } from 'react-router-dom';
 
 interface CourseCardProps {
   name:string;
@@ -17,9 +18,13 @@ const TutorCard: FC<CourseCardProps> = ({
   slotsTaken,
   courseSlots
 }) => {
+
   useEffect(()=>{
     console.log("slots taken", courseSlots)
   },[slotsTaken])
+
+  const navigate = useNavigate()
+
   return (
     <Card
       shadow="sm"
@@ -83,7 +88,9 @@ const TutorCard: FC<CourseCardProps> = ({
       </div>
       <button
         className="mt-[25px] text-[16px] h-[40px] flex justify-center items-center text-white p-3 bg-[#318CE7] hover:bg-[#43a0fc] active:bg-[#3176bb] transition-all rounded-md "
-        
+        onClick={()=>{
+          navigate("/mycourses/desc/65ed06b41b805aba53b7465b")
+        }}
       >
         Join Class
       </button>

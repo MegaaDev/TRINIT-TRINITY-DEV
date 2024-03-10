@@ -5,7 +5,7 @@ import { UserContext } from '../../Context/UserContextProvider';
 import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { URLSearchParams } from 'url';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Courses = () => {
   const [calenderSchedule, setCalenderSchedule] = useState<{
@@ -29,7 +29,7 @@ const Courses = () => {
   console.log(id);
   const [course, setCourse] = useState([]);
   const [description, setDescription] = useState('');
-
+  const navigate = useNavigate()
   // const { user } = useContext(UserContext);
   // const storedUser = localStorage.getItem('user');
   // const parsedUser = storedUser ? JSON.parse(storedUser) : null;
@@ -37,7 +37,9 @@ const Courses = () => {
   // console.log(currentUser);
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/courses/${id}`)
+      .get(`http://localhost:3000/api/courses/${id}`, {
+        withCredentials: true,
+      })
       .then((response) => {
         // Handle the response data here
         console.log(response.data);
@@ -121,7 +123,9 @@ const Courses = () => {
           style={{ boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.08)' }}
         >
           <p>{course.name}</p>
-          <div className="w-[200px] h-[50px] rounded-md cursor-pointer bg-customBlue font-semibold flex justify-center items-center text-white text-lg">
+          <div onClick={()=>{
+            navigate(`/mycourses/desc/65ed06b41b805aba53b7465b`)
+          }} className="w-[200px] h-[50px] rounded-md cursor-pointer bg-customBlue font-semibold flex justify-center items-center text-white text-lg">
             Start Live Session
           </div>
 

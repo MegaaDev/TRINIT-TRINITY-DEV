@@ -14,7 +14,9 @@ const Day = (props: Dday) => {
   const [selectedDay, setSelectedDay] = useState('');
 
   useEffect(()=>{
-    axios.get('http://localhost:3000/api/tutor/schedule')
+    axios.get('http://localhost:3000/api/tutor/schedule', {
+      withCredentials: true,
+    })
       .then((response) => {
         // Handle the response data here
         console.log(response.data);
@@ -23,7 +25,7 @@ const Day = (props: Dday) => {
         // Handle any errors here
         console.error(error);
       });
-  })
+  }, [])
   return (
     <div>
       {' '}
@@ -51,15 +53,15 @@ const Day = (props: Dday) => {
   );
 };
 
-const Slots = () => {
+const Slots = ({time, name}) => {
   return (
     <div className="w-full">
       <div className="w-full h-[80px] flex flex-row justify-between items-center gap-10">
         <div className="w-[300px] h-[70%] bg-[#7272f1] rounded-[10px] flex items-center justify-center font-semibold  text-xl text-[white]">
-          7:00AM - 8:00AM
+          {time}
         </div>
         <div className="font-medium text-xl text-[#000000]">
-          German in 90 days
+         {name}
         </div>
         <div className="w-[300px] flex flex-row gap-4">
           Student:{' '}
@@ -84,7 +86,9 @@ const Schedule = () => {
   const [array, setArray] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/courses/${currentUser.user._id}`)
+      .get(`http://localhost:3000/api/courses/all/${currentUser.user._id}`, {
+        withCredentials : true
+      })
       .then((response) => {
         // Handle the response data here
         console.log(response.data);
@@ -133,8 +137,8 @@ const Schedule = () => {
             className="rounded-[10px] w-[40%] h-[140px] bg-white flex items-center justify-left flex-wrap p-[40px] gap-[30px] cursor-pointer"
             style={{ boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.08)' }}
           >
-            <p>Slots Today: 5</p>
-            <p>Slots Done: 3</p>
+            <p>Slots Today: 4</p>
+            <p>Slots Done: 0</p>
           </div>
         </div>
         <div
@@ -147,13 +151,10 @@ const Schedule = () => {
             </p>
             <div className="w-full overflow-y-scroll">
               {' '}
-              <Slots />
-              <Slots />
-              <Slots />
-              <Slots />
-              <Slots />
-              <Slots />
-              <Slots />
+              <Slots name="Hello Stark" time={'7:30 - 8:30'}/>
+              <Slots name="German in 100 days" time={'9:30 - 11:30'}/>
+              <Slots name="English by Shakespere" time={'15:30 - 16:15'}/>
+              <Slots name="Awesome language" time={'17:00 - 17:45'}/>
             </div>
           </div>
         </div>

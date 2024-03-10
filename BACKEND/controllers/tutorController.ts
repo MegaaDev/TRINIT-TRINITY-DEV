@@ -20,7 +20,6 @@ const isTutor = expressAsyncHandler(
 
 const getSchedule = expressAsyncHandler(async (req: any, res) => {
   const tutor = await Tutor.findOne({ user: req.user._id });
-  console.log(tutor);
   if (!tutor) {
     res.status(404).json({
       status: 'fail',
@@ -58,20 +57,20 @@ const getAllTutors = expressAsyncHandler(async (req, res) => {
   });
 });
 
-const getSchedule = expressAsyncHandler(async (req: any, res) => {
-  const tutor = await Tutor.findById(req.params.id).populate('user');
-  if (!tutor) {
-    res.status(404).json({
-      status: 'fail',
-      message: 'Tutor not found',
-    });
-    return;
-  }
-  res.status(200).json({
-    status: 'success',
-    schedule: tutor,
-  });
-});
+// const getSchedule = expressAsyncHandler(async (req: any, res) => {
+//   const tutor = await Tutor.findById(req.params.id).populate('user');
+//   if (!tutor) {
+//     res.status(404).json({
+//       status: 'fail',
+//       message: 'Tutor not found',
+//     });
+//     return;
+//   }
+//   res.status(200).json({
+//     status: 'success',
+//     schedule: tutor,
+//   });
+// });
 
 const getTutorByLanguage = expressAsyncHandler(async (req, res) => {
   const tutors = await Tutor.find({ language: req.params.language });

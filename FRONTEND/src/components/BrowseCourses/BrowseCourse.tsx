@@ -9,7 +9,10 @@ const BrowseCourse: FC<BrowseCourseProps> = ({}) => {
   const [courses, setCourses] = useState([]);
   useEffect(() => {
     axios
-      .get('http://localhost:3000/api/courses')
+      .get('http://localhost:3000/api/courses', {
+        withCredentials: true,
+      
+      })
       .then((response) => {
         // Handle the response data here
         console.log(response.data.courses);
