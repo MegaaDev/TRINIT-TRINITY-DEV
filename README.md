@@ -1,4 +1,4 @@
-# LinguaConnect by Team TRINITY (Tri-NIT Hackathon second runner ups)
+# LinguaConnect by Team TRINITY (Tri-NIT Hackathon 24' 2nd runner ups)
 
 ## Objective
 
